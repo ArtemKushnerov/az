@@ -1,30 +1,12 @@
-apks_to_analyze = 100
+output_dir = r'c:\SaToSS\out'
 
-analyze_only_malware = False
-analyze_only_existing_on_disk = True
-
-api_key = '98da5f71867dcfd6cd7878435c29a0f94bb8862c63d65439fdb862a93151c831'
-
-
-# Paths
-datasets_dir = 'D:\google_play'
-apk_dir = datasets_dir + '/apks'
-decompiled_apks_dir = datasets_dir + '/decompiled_apks'
-csv_path = 'c:\SaToSS\latest.csv'
-results_path = '../../results/'
-results_file = 'results.txt'
-dataset_save_path_file = 'dataset.csv'
-not_found_permissions_file = 'not_found_permissions.txt'
-target_api_level_distribution_file = 'target_api_level_distribution.png'
-estimated_api_level_distribution_file = 'estimated_target_api_level_distribution.png'
-permissions_csv_file = datasets_dir + '/permissions.csv'
-
-# Concurrency
-concurrency_module = 'dummy'
-
-concurrent_download = False
-pool_size_downloading = 4
-
-concurrent_decompiling = True
-pool_size_decompiling = 10
-
+config = {
+    # mandatory
+    'number': 10,
+    # optional, comment out those you don't need
+    'dex_date': {'from': '', 'to': ''},
+    'apk_size': {'from': 1, 'to': 4},
+    'pkg_name': ['pkg1'],
+    'vt_detection': {'from': 0, 'to': 5},
+    'markets': ['market1', 'market2'],
+}

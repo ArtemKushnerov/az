@@ -26,7 +26,7 @@ class RandomPickerTest(unittest.TestCase):
     def test_return_dataset_of_size_n(self):
         subset = RandomPicker().get_random_subset(Dataset(Apk('apk1'), Apk('apk2'), Apk('apk3')), 2)
         self.assertEquals(len(subset), 2)
-        subset = RandomPicker().get_random_subset(Dataset(Apk('apk1'), Apk('apk2'), Apk('apk3'),Apk('apk4')), 3)
+        subset = RandomPicker().get_random_subset(Dataset(Apk('apk1'), Apk('apk2'), Apk('apk3'), Apk('apk4')), 3)
         self.assertEquals(len(subset), 3)
 
     def test_return_subset_of_dataset(self):

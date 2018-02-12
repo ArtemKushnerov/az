@@ -1,7 +1,6 @@
 from abc import abstractmethod, ABC
 from dateutil.parser import parse
 
-
 class Entity(ABC):
 
     @abstractmethod
@@ -77,25 +76,11 @@ class Apk(Entity):
         self.vt_detection = vt_detection
         self.markets = markets
 
-    def satisfies(self, criteria):
-        satisfies = True
-        if criteria.dex_date is not None:
-            satisfies = satisfies and self.dex_date is not None and parse(criteria.dex_date.get('from')) < self.dex_date < parse(criteria.dex_date.get('to'))
-        if criteria.apk_size is not None:
-            satisfies = satisfies and criteria.apk_size.get('from') < self.apk_size < criteria.apk_size.get('to')
-        if criteria.pkg_name is not None:
-            satisfies = satisfies and self.pkg_name in criteria.pkg_name
-        if criteria.vt_detection is not None:
-            satisfies = satisfies and criteria.vt_detection.get('from') < self.vt_detection < criteria.vt_detection.get('to')
-        if criteria.markets is not None:
-            satisfies = satisfies and criteria.markets.intersection(self.markets)
-        return satisfies
-
     def _key(self):
         return (self.pkg_name)
 
     def __str__(self):
-        return f' pkg_name:{self.pkg_name};apk_size:{self.apk_size}'
+        return f'pkg_name:{self.pkg_name}; apk_size:{self.apk_size}'
 
     def __repr__(self):
         return self.__str__()

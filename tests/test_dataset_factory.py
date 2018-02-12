@@ -18,7 +18,7 @@ class DatasetFactoryTest(TestCase):
         evaluator_mock = mock.create_autospec(ApkEvaluator)
         factory = DatasetFactory(source, evaluator_mock)
 
-        expected_dataset = Dataset([Apk('apk1'), Apk('apk3')])
+        expected_dataset = Dataset(Apk('apk1'), Apk('apk3'))
         input_criteria = {}
         evaluator_mock.satisfies.side_effect = lambda apk, criteria: apk.pkg_name in ('apk1', 'apk3') and criteria == input_criteria
         actual_dataset = factory.create_dataset(input_criteria)

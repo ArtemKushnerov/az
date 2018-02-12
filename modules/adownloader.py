@@ -1,4 +1,8 @@
+import logging
+import random
+
 from modules.entities import Dataset, Apk, Criteria, Metadata, Source
+from modules.exceptions import EmptyDatasetException
 
 
 class DatasetFactory:
@@ -15,8 +19,23 @@ class DatasetFactory:
 
 
 class RandomPicker:
-    def get_random_subset(self, dataset, size):
-        pass
+
+    def __init__(self, seed=None):
+        if seed is not None:
+            random.seed(seed)
+
+    def get_random_subset(self, input_dataset, requested_size):
+        if input_dataset.is_empty():
+            raise EmptyDatasetException()
+        if len(input_dataset) < requested_size:
+            logging.warning('Input dataset size less than requested random subset size, returning copy of input dataset')
+            return Dataset(*input_dataset.apks)
+        unique_random_apks = set()
+        subset_size = min(len(input_dataset), requested_size)
+        while len(unique_random_apks) != subset_size:
+            apk = random.choice(input_dataset.apks)
+            unique_random_apks.add(apk)
+        return Dataset(*unique_random_apks)
 
 
 class DatasetDownloader:

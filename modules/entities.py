@@ -15,18 +15,6 @@ class Entity(ABC):
         return hash(self._key())
 
 
-class Criteria(Entity):
-    def __init__(self, dex_date=None, apk_size=None, pkg_name=None, vt_detection=None, markets=None):
-        self.dex_date = dex_date
-        self.apk_size = apk_size
-        self.pkg_name = pkg_name
-        self.vt_detection = vt_detection
-        self.markets = markets
-
-    def _key(self):
-        pass
-
-
 class Source(Entity):
     def __init__(self, records):
         self.records = records
@@ -58,6 +46,9 @@ class Dataset(Entity):
     def __str__(self):
         return str(self.apks)
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class Metadata(Entity):
 
@@ -66,7 +57,7 @@ class Metadata(Entity):
 
 
 class Apk(Entity):
-    def __init__(self, apk_size=None, pkg_name=None, dex_date=None, vt_detection=None, markets=None):
+    def __init__(self, pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None):
         self.apk_size = apk_size
         self.pkg_name = pkg_name
         self.dex_date = None
@@ -85,7 +76,7 @@ class Apk(Entity):
             satisfies = satisfies and self.pkg_name in criteria.pkg_name
         if criteria.vt_detection is not None:
             satisfies = satisfies and criteria.vt_detection.get('from') < self.vt_detection < criteria.vt_detection.get('to')
-        if criteria.vt_detection is not None:
+        if criteria.markets is not None:
             satisfies = satisfies and criteria.markets.intersection(self.markets)
         return satisfies
 

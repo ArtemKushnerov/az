@@ -1,6 +1,6 @@
 output_dir = r'c:\SaToSS\out'
 
-config = {
+criteria = {
     # mandatory
     'number': 10,
     # optional, comment out those you don't need

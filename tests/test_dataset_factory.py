@@ -1,29 +1,28 @@
 import unittest
+from unittest import mock
+
 from unittest import TestCase
 
-from modules.adownloader import DatasetFactory, Criteria, Source, Apk, Dataset
+from modules.adownloader import DatasetFactory, Source
+from modules.entities import Apk, Dataset
+from modules.services import ApkEvaluator
 
 
 class DatasetFactoryTest(TestCase):
 
     def test_create_dataset_according_to_criteria(self):
-        source = Source(records=[{'apk_size': 1, 'pkg_name': 'apk1', 'dex_date': '4/5/2016'},
-                                      {'apk_size': 2, 'pkg_name': 'apk2'},
-                                      {'apk_size': 1, 'pkg_name': 'apk3'}])
-        factory = DatasetFactory(source)
-        apk1 = Apk(pkg_name='apk1', apk_size=2, dex_date='4/5/2016')
-        apk2 = Apk(pkg_name='apk2', apk_size=2)
-        apk3 = Apk(pkg_name='apk3', apk_size=1)
-        expected_dataset = Dataset([apk1, apk3])
+        source = Source(records=[{'pkg_name': 'apk1'},
+                                 {'pkg_name': 'apk2'},
+                                 {'pkg_name': 'apk3'}])
+        evaluator_mock = mock.create_autospec(ApkEvaluator)
+        factory = DatasetFactory(source, evaluator_mock)
 
-        actual_dataset = factory.create_dataset(Criteria(apk_size={'from': 0, 'to': 1.5}))
+        expected_dataset = Dataset([Apk('apk1'), Apk('apk3')])
+        input_criteria = {}
+        evaluator_mock.satisfies.side_effect = lambda apk, criteria: apk.pkg_name in ('apk1', 'apk3') and criteria == input_criteria
+        actual_dataset = factory.create_dataset(input_criteria)
         self.assertEqual(expected_dataset, actual_dataset)
-
-        actual_dataset = factory.create_dataset(Criteria(apk_size={'from': 1.5, 'to': 2.5}))
-        self.assertEqual(Dataset([apk2]), actual_dataset)
-
-        actual_dataset = factory.create_dataset(Criteria(dex_date={'from': '3/5/2016', 'to': '6/5/2016'}))
-        self.assertEqual(Dataset([apk1]), actual_dataset)
+        self.assertEqual(evaluator_mock.satisfies.call_count, 3)
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ class Entity(ABC):
         pass
 
     def __eq__(self, other):
-        return self._key() == other._key()
+        return other is not None and self._key() == other._key()
 
     def __hash__(self):
         return hash(self._key())
@@ -44,20 +44,31 @@ class Record(Entity):
 
 
 class Dataset(Entity):
-    def __init__(self, apks=None):
+    def __init__(self, *apks):
         if apks is None:
-            apks = []
-        self.apks = apks
+            apks = tuple()
+        self.apks = tuple(apks)
 
     def _key(self):
-        return self.apks
+        return frozenset(self.apks)
 
     def add(self, apk):
-        self.apks.append(apk)
+        self.apks = (*self.apks, apk)
 
     def __str__(self):
         return str(self.apks)
 
+    def __len__(self):
+        return len(self.apks)
+
+    def __iter__(self):
+        return iter(self.apks)
+
+    def contains(self, subset):
+        return set(subset.apks).issubset(set(self.apks))
+
+    def is_empty(self):
+        return len(self.apks) == 0
 
 class Metadata(Entity):
 
@@ -66,7 +77,7 @@ class Metadata(Entity):
 
 
 class Apk(Entity):
-    def __init__(self, apk_size=None, pkg_name=None, dex_date=None, vt_detection=None, markets=None):
+    def __init__(self,pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None):
         self.apk_size = apk_size
         self.pkg_name = pkg_name
         self.dex_date = None

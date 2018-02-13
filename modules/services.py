@@ -1,9 +1,10 @@
 import logging
 import random
 
+from dateutil.parser import parse
+
 from modules.entities import Dataset, Apk
 from modules.exceptions import EmptyDatasetException
-from dateutil.parser import parse
 
 
 class ApkEvaluator:
@@ -11,20 +12,31 @@ class ApkEvaluator:
         pass
 
     def satisfies(self, apk, criteria):
-        if apk is None:
+        if not apk:
             return False
+
         satisfies = True
-        if criteria.get('dex_date') is not None:
-            requested_date = criteria.get('dex_date')
-            satisfies = satisfies and apk.dex_date is not None and parse(requested_date.get('from')) <= apk.dex_date <= parse(requested_date.get('to'))
-        if criteria.get('apk_size') is not None:
-            satisfies = satisfies and criteria.apk_size.get('from') < apk.apk_size < criteria.apk_size.get('to')
-        # if criteria.pkg_name is not None:
-        #     satisfies = satisfies and apk.pkg_name in criteria.pkg_name
-        # if criteria.vt_detection is not None:
-        #     satisfies = satisfies and criteria.vt_detection.get('from') < apk.vt_detection < criteria.vt_detection.get('to')
-        # if criteria.markets is not None:
-        #     satisfies = satisfies and criteria.markets.intersection(apk.markets)
+
+        criteria_dex_date = criteria.get('dex_date')
+        if criteria_dex_date:
+            satisfies = satisfies and apk.dex_date and parse(criteria_dex_date.get('from')) <= apk.dex_date <= parse(criteria_dex_date.get('to'))
+
+        criteria_apk_size = criteria.get('apk_size')
+        if criteria_apk_size:
+            satisfies = satisfies and apk.apk_size and criteria_apk_size.get('from') <= apk.apk_size <= criteria_apk_size.get('to')
+
+        criteria_pkg_name = criteria.get('pkg_name')
+        if criteria_pkg_name:
+            satisfies = satisfies and apk.pkg_name in criteria_pkg_name
+
+        criteria_vt_detection = criteria.get('vt_detection')
+        if criteria_vt_detection:
+            satisfies = satisfies and apk.vt_detection and criteria_vt_detection.get('from') <= apk.vt_detection <= criteria_vt_detection.get('to')
+
+        criteria_markets = criteria.get('markets')
+        if criteria_markets:
+            satisfies = satisfies and apk.markets and set(criteria_markets).intersection(set(apk.markets))
+
         return satisfies
 
 

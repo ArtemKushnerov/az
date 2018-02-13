@@ -67,7 +67,7 @@ class Metadata(Entity):
 
 
 class Apk(Entity):
-    def __init__(self, pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None):
+    def __init__(self, pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None, sha256=None):
         self.apk_size = apk_size
         self.pkg_name = pkg_name
         self.dex_date = None
@@ -75,6 +75,8 @@ class Apk(Entity):
             self.dex_date = parse(dex_date)
         self.vt_detection = vt_detection
         self.markets = markets
+        #todo only this field is mandatory
+        self.sha256 = sha256
 
     def _key(self):
         return (self.pkg_name)

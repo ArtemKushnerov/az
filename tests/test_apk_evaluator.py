@@ -28,7 +28,7 @@ class CriteriaTest(unittest.TestCase):
         criteria = {'apk_size': {'from': 10, 'to': 20}}
         self.assertTrue(ApkEvaluator().satisfies(Apk(apk_size=15), criteria))
         self.assertFalse(ApkEvaluator().satisfies(Apk(apk_size=5), criteria))
-        self.assertFalse(ApkEvaluator().satisfies(Apk(apk_size=20), criteria))
+        self.assertTrue(ApkEvaluator().satisfies(Apk(apk_size=20), criteria))
         self.assertFalse(ApkEvaluator().satisfies(Apk(), criteria))
 
     def test_pkg_name(self):

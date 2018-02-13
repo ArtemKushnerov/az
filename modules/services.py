@@ -1,5 +1,9 @@
 import logging
+import os
 import random
+import shutil
+import sys
+import urllib.request
 
 from dateutil.parser import parse
 
@@ -8,9 +12,6 @@ from modules.exceptions import EmptyDatasetException
 
 
 class ApkEvaluator:
-    def __init__(self, ):
-        pass
-
     def satisfies(self, apk, criteria):
         if not apk:
             return False
@@ -55,7 +56,6 @@ class DatasetFactory:
 
 
 class RandomPicker:
-
     def __init__(self, seed=None):
         if seed is not None:
             random.seed(seed)
@@ -74,12 +74,42 @@ class RandomPicker:
         return Dataset(*unique_random_apks)
 
 
-class DatasetDownloader:
-    def __init__(self, dataset, out_dir):
+class UrlConstructor:
+    def __init__(self, base_url='', key=''):
+        self.base_url = base_url
+        self.key = key
+
+    def construct(self, apk):
         pass
 
+
+class DatasetDownloader:
+    def __init__(self, dataset, out_dir='azoo_dataset', url_constructor=UrlConstructor()):
+        self.dataset = dataset
+        self.out_dir = out_dir
+        self.url_constructor = url_constructor
+
     def download(self):
-        pass
+        logging.info(f'DOWNLOADING {len(self.dataset)} APKS...')
+        if not os.path.exists(self.out_dir):
+            os.makedirs(self.out_dir)
+
+        for apk in self.dataset:
+            self.download_apk(apk)
+
+    def download_apk(self, apk):
+        apk_save_path = os.path.join(self.out_dir, apk.pkg_name)
+        try:
+            if os.path.exists(apk_save_path):
+                logging.debug(f'{apk.pkg_name} is already downloaded')
+                return
+            logging.debug(f'Downloading {apk.pkg_name}... ')
+            apk_url = self.url_constructor.construct(apk)
+            with urllib.request.urlopen(apk_url) as response, open(apk_save_path, 'wb') as out_file:
+                shutil.copyfileobj(response, out_file)
+        except:
+            # todo handle exception better
+            logging.error(f'Unexpected error while downloading {apk.pkg_name}: {sys.exc_info()[1])}')
 
 
 class MetadataSaver:

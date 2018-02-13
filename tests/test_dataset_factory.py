@@ -1,4 +1,3 @@
-import random
 import unittest
 from unittest import mock
 
@@ -24,6 +23,7 @@ class DatasetFactoryTest(TestCase):
         actual_dataset = factory.create_dataset(input_criteria)
         self.assertEqual(expected_dataset, actual_dataset)
         self.assertEqual(evaluator_mock.satisfies.call_count, 3)
+
 
 if __name__ == '__main__':
     unittest.main()

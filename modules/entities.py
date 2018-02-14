@@ -15,8 +15,19 @@ class Entity(ABC):
 
 
 class Source(Entity):
-    def __init__(self, records):
+    def __init__(self, records=None, input_file=None):
+        if not records:
+            records = []
         self.records = records
+        if input_file:
+            with open(input_file) as input_file:
+                lines = input_file.readlines()
+                header = lines[0].strip('\n').split(',')
+                for line in lines[1:]:
+                    records.append(dict(zip(header, line.strip('\n').replace('"', '').split(','))))
+                self.records = input_file.readlines()
+
+
 
     def _key(self):
         pass

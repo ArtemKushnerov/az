@@ -2,7 +2,7 @@ from modules.entities import Metadata, Source
 from modules.services import DatasetFactory, RandomPicker, DatasetDownloader, MetadataSaver
 
 
-def run(input_file, number, criteria, out_dir='azoo_dataset'):
+def run(input_file, base_url, key, number, criteria, out_dir='azoo_dataset'):
     metadata = Metadata()
     source = Source(input_file)
 

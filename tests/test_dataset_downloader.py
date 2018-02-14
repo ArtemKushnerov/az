@@ -13,7 +13,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         self.dataset = Dataset(self.apk, self.apk2)
         self.constructor_mock = mock.create_autospec(UrlConstructor)
         self.constructor_mock.construct.side_effect = lambda apk: apk.sha256  # use sha256 of apk as download url, just for a test
-        self.dataset_downloader = DatasetDownloader(self.dataset, out_dir='out', url_constructor=self.constructor_mock)
+        self.dataset_downloader = DatasetDownloader(self.dataset,url_constructor=self.constructor_mock, out_dir='out')
 
     @mock.patch('urllib.request')
     @mock.patch("modules.services.open")
@@ -21,17 +21,18 @@ class DatasetDownloaderTest(unittest.TestCase):
     @mock.patch("modules.services.os")
     def test_checks_if_out_dir_exists(self, os_mock, mock_shutil, mock_open, mock_request):
         self.dataset_downloader.download()
-        os_mock.path.exists.assert_called_with('out')
+        os_mock.path.exists.assert_any_call('out')
 
         os_mock.path.exists.return_value = False
         self.dataset_downloader.download()
-        os_mock.path.exists.assert_called_with('out')
+        os_mock.path.exists.assert_any_call('out')
         os_mock.makedirs.assert_called_with('out')
 
+    @mock.patch("modules.services.os.makedirs")
     @mock.patch('urllib.request')
     @mock.patch("modules.services.open")
     @mock.patch("modules.services.shutil")
-    def test_downloads_apks(self, shutil_mock, open_mock, request_mock):
+    def test_downloads_apks(self, shutil_mock, open_mock, request_mock, os_mock):
         self.dataset_downloader.download()
 
         self.assertEqual(self.constructor_mock.construct.call_args_list, [mock.call(self.apk), mock.call(self.apk2)])

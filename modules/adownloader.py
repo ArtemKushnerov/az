@@ -8,5 +8,5 @@ def run(input_file, number, criteria, out_dir='azoo_dataset'):
 
     dataset = DatasetFactory(source).create_dataset(criteria)
     random_subset = RandomPicker().get_random_subset(dataset, number)
-    DatasetDownloader(random_subset, out_dir).download()
+    DatasetDownloader(random_subset, out_dir, base_url, key).download()
     MetadataSaver(random_subset, out_dir).save(metadata)

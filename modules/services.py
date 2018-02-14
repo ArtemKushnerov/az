@@ -80,13 +80,15 @@ class UrlConstructor:
         self.key = key
 
     def construct(self, apk):
-        pass
+        return self.base_url.format(self.key, apk.sha256)
 
 
 class DatasetDownloader:
-    def __init__(self, dataset, out_dir='azoo_dataset', url_constructor=UrlConstructor()):
+    def __init__(self, dataset, url_constructor, base_url='', key='', out_dir='azoo_dataset'):
         self.dataset = dataset
         self.out_dir = out_dir
+        if not url_constructor:
+            url_constructor = UrlConstructor(base_url, key)
         self.url_constructor = url_constructor
 
     def download(self):
@@ -109,7 +111,7 @@ class DatasetDownloader:
                 shutil.copyfileobj(response, out_file)
         except:
             # todo handle exception better
-            logging.error(f'Unexpected error while downloading {apk.pkg_name}: {sys.exc_info()[1])}')
+            logging.error(f'Unexpected error while downloading {apk.pkg_name}: {sys.exc_info()[1]}')
 
 
 class MetadataSaver:

@@ -1,6 +1,7 @@
 from abc import abstractmethod, ABC
 from dateutil.parser import parse
 
+
 class Entity(ABC):
 
     @abstractmethod
@@ -26,8 +27,6 @@ class Source(Entity):
                 for line in lines[1:]:
                     records.append(dict(zip(header, line.strip('\n').replace('"', '').split(','))))
                 self.records = input_file.readlines()
-
-
 
     def _key(self):
         pass
@@ -70,11 +69,6 @@ class Dataset(Entity):
 
     def __repr__(self):
         return self.__str__()
-
-class Metadata(Entity):
-
-    def _key(self):
-        pass
 
 
 class Apk(Entity):

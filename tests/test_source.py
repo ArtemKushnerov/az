@@ -11,8 +11,5 @@ class SourceTest(unittest.TestCase):
                             {'sha256':'00000439A3FFA123C3F9BC45E5E821351B1A5C276871B36447AB80C74261F354','sha1':'375D6FFD167BB5E7E2935B1B927F87D8E44A9AB4','md5':'9283C74DD8356C18BB6D94B88B8FDD9B','dex_date':'2011-10-25 02:30:56','apk_size':'1044597','pkg_name':'bmthx.god102409paperi','vercode':'6','vt_detection':'1','vt_scan_date':'2014-04-27 06:30:31','dex_size':'105660','markets':'appchina'}]
         self.assertEqual(source.records, expected_records)
 
-    def test(self):
-        Source(input_file='c:\SaToSS\latest.csv')
-
 if __name__ == '__main':
     unittest.main()

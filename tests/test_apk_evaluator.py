@@ -24,6 +24,14 @@ class CriteriaTest(unittest.TestCase):
         self.assertFalse(ApkEvaluator().satisfies(Apk(dex_date='2/13/2016 17:58'), criteria))
         self.assertFalse(ApkEvaluator().satisfies(Apk(), criteria))
 
+        criteria = {'dex_date': {'from': '3/3/2016'}}
+        self.assertTrue(ApkEvaluator().satisfies(Apk(dex_date='4/3/2016 17:58'), criteria))
+        self.assertFalse(ApkEvaluator().satisfies(Apk(dex_date='2/3/2016 17:58'), criteria))
+
+        criteria = {'dex_date': {'to': '3/3/2016'}}
+        self.assertFalse(ApkEvaluator().satisfies(Apk(dex_date='4/3/2016 17:58'), criteria))
+        self.assertTrue(ApkEvaluator().satisfies(Apk(dex_date='2/3/2016 17:58'), criteria))
+
     def test_apk_size(self):
         criteria = {'apk_size': {'from': 10, 'to': 20}}
         self.assertTrue(ApkEvaluator().satisfies(Apk(apk_size=15), criteria))

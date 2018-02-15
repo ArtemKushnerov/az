@@ -12,6 +12,7 @@ from modules.exceptions import EmptyDatasetException
 
 
 class ApkEvaluator:
+
     def satisfies(self, apk, criteria):
         if not apk:
             return False
@@ -20,7 +21,11 @@ class ApkEvaluator:
 
         criteria_dex_date = criteria.get('dex_date')
         if criteria_dex_date:
-            satisfies = satisfies and apk.dex_date and parse(criteria_dex_date.get('from')) <= apk.dex_date <= parse(criteria_dex_date.get('to'))
+            satisfies = satisfies and apk.dex_date
+            if criteria_dex_date.get('from'):
+                satisfies = satisfies and parse(criteria_dex_date.get('from')) <= apk.dex_date
+            if criteria_dex_date.get('to'):
+                satisfies = satisfies and apk.dex_date <= parse(criteria_dex_date.get('to'))
 
         criteria_apk_size = criteria.get('apk_size')
         if criteria_apk_size:
@@ -84,7 +89,7 @@ class UrlConstructor:
 
 
 class DatasetDownloader:
-    def __init__(self, dataset, url_constructor, base_url='', key='', out_dir='azoo_dataset'):
+    def __init__(self, dataset, url_constructor=None, base_url='', key='', out_dir='azoo_dataset'):
         self.dataset = dataset
         self.out_dir = out_dir
         if not url_constructor:
@@ -100,7 +105,7 @@ class DatasetDownloader:
             self.download_apk(apk)
 
     def download_apk(self, apk):
-        apk_save_path = os.path.join(self.out_dir, apk.pkg_name)
+        apk_save_path = os.path.join(self.out_dir, apk.pkg_name) +'.apk'
         try:
             if os.path.exists(apk_save_path):
                 logging.debug(f'{apk.pkg_name} is already downloaded')

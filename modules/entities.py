@@ -20,13 +20,15 @@ class Source(Entity):
         if not records:
             records = []
         self.records = records
+        self.init_from_file(input_file, records)
+
+    def init_from_file(self, input_file, records):
         if input_file:
             with open(input_file) as input_file:
                 lines = input_file.readlines()
                 header = lines[0].strip('\n').split(',')
                 for line in lines[1:]:
                     records.append(dict(zip(header, line.strip('\n').replace('"', '').split(','))))
-                self.records = input_file.readlines()
 
     def _key(self):
         pass
@@ -72,13 +74,15 @@ class Dataset(Entity):
 
 
 class Apk(Entity):
-    def __init__(self, pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None, sha256=None):
+    def __init__(self, pkg_name=None, apk_size=None, dex_date=None, vt_detection=None, markets=None, sha256=None, **kwargs):
         self.apk_size = apk_size
         self.pkg_name = pkg_name
         self.dex_date = None
         if dex_date is not None:
             self.dex_date = parse(dex_date)
         self.vt_detection = vt_detection
+        if markets:
+            markets = markets.split('|')
         self.markets = markets
         #todo only this field is mandatory
         self.sha256 = sha256

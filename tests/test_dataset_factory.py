@@ -4,8 +4,9 @@ from unittest import mock
 from unittest import TestCase
 
 from modules.adownloader import DatasetFactory, Source
-from modules.entities import Apk, Dataset
-from modules.services import ApkEvaluator
+from modules.entities.apk import Apk
+from modules.entities.dataset import Dataset
+from modules.services.apk_evaluator import ApkEvaluator
 
 
 class DatasetFactoryTest(TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from modules.entities import Source
+from modules.entities.source import Source
 
 
 class SourceTest(unittest.TestCase):

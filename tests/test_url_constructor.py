@@ -1,7 +1,7 @@
 import unittest
 
-from modules.entities import Apk
-from modules.services import UrlConstructor
+from modules.entities.apk import Apk
+from modules.services.url_constructor import UrlConstructor
 
 
 class UrlConstructorTest(unittest.TestCase):

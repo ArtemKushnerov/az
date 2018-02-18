@@ -4,8 +4,9 @@ import os
 
 import shutil
 
-from modules.entities import Dataset, Apk
-from modules.services import MetadataSaver
+from modules.entities.apk import Apk
+from modules.entities.dataset import Dataset
+from modules.services.metadata_saver import MetadataSaver
 
 
 class MetadataSeverTest(unittest.TestCase):

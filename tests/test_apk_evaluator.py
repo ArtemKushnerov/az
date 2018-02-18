@@ -1,7 +1,7 @@
 import unittest
 
-from modules.entities import Apk
-from modules.services import ApkEvaluator
+from modules.entities.apk import Apk
+from modules.services.apk_evaluator import ApkEvaluator
 
 
 class CriteriaTest(unittest.TestCase):
@@ -69,7 +69,7 @@ class CriteriaTest(unittest.TestCase):
                     'apk_size': {'from': 1, 'to': 4},
                     'pkg_name': ['pkg1', 'pkg2'],
                     'vt_detection': {'from': 1, 'to': 5},
-                    'markets': ['market1', 'market2']}
+                    'markets': set(['market1', 'market2'])}
         self.assertTrue(ApkEvaluator().satisfies(Apk(dex_date='3/4/2016 17:58', apk_size=3, pkg_name='pkg1', vt_detection=3, markets=['market1']), criteria))
         self.assertTrue(ApkEvaluator().satisfies(Apk(dex_date='3/3/2016 17:58', apk_size=4, pkg_name='pkg2', vt_detection=4, markets=['market1','market2']), criteria))
         self.assertFalse(ApkEvaluator().satisfies(Apk(dex_date='3/4/2016 17:58', apk_size=5, pkg_name='pkg1', vt_detection=3, markets=['market1']), criteria))

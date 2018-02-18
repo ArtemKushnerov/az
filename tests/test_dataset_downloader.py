@@ -1,8 +1,10 @@
 import unittest
 from unittest import mock
 
-from modules.entities import Dataset, Apk
-from modules.services import DatasetDownloader, UrlConstructor
+from modules.entities.apk import Apk
+from modules.entities.dataset import Dataset
+from modules.services.dataset_downloader import DatasetDownloader
+from modules.services.url_constructor import UrlConstructor
 
 
 class DatasetDownloaderTest(unittest.TestCase):

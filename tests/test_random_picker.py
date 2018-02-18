@@ -1,8 +1,9 @@
 import unittest
 
+from modules.entities.apk import Apk
+from modules.entities.dataset import Dataset
 from modules.exceptions import EmptyDatasetException
 from modules.adownloader import RandomPicker
-from modules.entities import Dataset, Apk
 
 
 class RandomPickerTest(unittest.TestCase):

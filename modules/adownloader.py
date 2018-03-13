@@ -21,3 +21,4 @@ def run(input_file, base_url, key, number, criteria, metadata, out_dir='azoo_dat
     except KeyboardInterrupt as ki:
         logging.info('Keyboard interrupt')
         sys.exit()
+

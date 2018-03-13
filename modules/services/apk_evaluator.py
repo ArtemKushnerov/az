@@ -1,13 +1,14 @@
-import logging
 from datetime import datetime
 
 
 class ApkEvaluator:
 
+    date_pattern = '%Y-%m-%d %H:%M:%S'
+
     def satisfies(self, apk, criteria):
         if not apk:
             return False
-        return self.satisfies_markets(apk, criteria) and self.satisfies_date(apk, criteria) and self.satisfies_name(apk, criteria) and self.satisfies_vt_detection(apk, criteria)
+        return self.satisfies_markets(apk, criteria) and self.satisfies_size(apk, criteria) and self.satisfies_date(apk, criteria) and self.satisfies_name(apk, criteria) and self.satisfies_vt_detection(apk, criteria)
 
     def satisfies_markets(self, apk, criteria):
         satisfies = True

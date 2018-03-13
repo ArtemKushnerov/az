@@ -3,10 +3,7 @@ from modules.entities.entity import Entity
 
 
 class Source(Entity):
-    def __init__(self, apks=None, input_file=None):
-        if not apks:
-            apks = []
-        self.apks = apks
+    def __init__(self, input_file=None):
         self.input_file = open(input_file)
         next(self.input_file) # skip header
 

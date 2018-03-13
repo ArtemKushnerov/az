@@ -69,3 +69,5 @@ venv
 
 *.apk
 
+tests/integration/azoo_dataset/
+tests/unit/out

@@ -14,7 +14,7 @@ def run(input_file, base_url, key, number, criteria, metadata, out_dir='azoo_dat
     try:
         source = Source(input_file=input_file)
 
-        dataset = DatasetFactory(source, criteria).create_dataset(criteria)
+        dataset = DatasetFactory(source, criteria).create_dataset()
         random_subset = RandomPicker().get_random_subset(dataset, number)
         DatasetDownloader(dataset=random_subset, out_dir=out_dir, base_url=base_url, key=key).download()
 

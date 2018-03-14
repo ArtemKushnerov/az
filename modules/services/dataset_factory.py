@@ -11,14 +11,14 @@ class DatasetFactory:
         self.apk_evaluator = evaluator
         self.apk_evaluator.criteria = criteria
 
-    def create_dataset(self, criteria):
-        logging.info(f'CREATE INITIAL DATASET BY CRITERIA: {criteria}')
+    def create_dataset(self):
+        logging.info(f'CREATE INITIAL DATASET BY CRITERIA: {self.apk_evaluator.criteria}')
 
         dataset = Dataset()
         for apk in self.source:
             logging.debug(f'EVALUATE {apk.pkg_name}')
             if self.apk_evaluator.satisfies(apk):
-                logging.debug(f'{str(apk)} SATISFIES CRITERIA' )
+                logging.debug(f'{str(apk)} SATISFIES CRITERIA')
                 dataset.add(apk)
         logging.info(f'DATASET HAS BEEN CREATED. {len(dataset)} APKS SATISFY CRITERIA')
 

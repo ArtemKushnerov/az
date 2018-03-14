@@ -10,6 +10,7 @@ from modules.services.random_picker import RandomPicker
 
 def run(input_file, base_url, key, number, criteria, metadata, out_dir='azoo_dataset'):
     logging.info(f'START. APKS TO DOWNLOAD: {number}')
+    source = None
     try:
         source = Source(input_file=input_file)
 
@@ -21,4 +22,7 @@ def run(input_file, base_url, key, number, criteria, metadata, out_dir='azoo_dat
     except KeyboardInterrupt as ki:
         logging.info('Keyboard interrupt')
         sys.exit()
+    finally:
+        if source:
+            source.input_file.close()
 

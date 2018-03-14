@@ -41,7 +41,7 @@ class ApkEvaluator:
     def satisfies_date(self, apk, criteria):
         satisfies = True
         criteria_dex_date = criteria.get('dex_date')
-        apk_date = datetime.strptime(apk.dex_date, '%Y-%m-%d %H:%M:%S') if apk.dex_date else None
+        apk_date = datetime.strptime(apk.dex_date, self.date_pattern) if apk.dex_date else None
         if criteria_dex_date:
             satisfies = self.falls_into_range(apk_date, criteria_dex_date)
 

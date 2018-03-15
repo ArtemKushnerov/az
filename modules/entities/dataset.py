@@ -13,9 +13,6 @@ class Dataset(Entity):
     def add(self, apk):
         self.apks.append(apk)
 
-    def __str__(self):
-        return str(self.apks)
-
     def __len__(self):
         return len(self.apks)
 
@@ -27,6 +24,3 @@ class Dataset(Entity):
 
     def is_empty(self):
         return len(self.apks) == 0
-
-    def __repr__(self):
-        return self.__str__()

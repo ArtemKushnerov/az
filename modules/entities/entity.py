@@ -12,3 +12,9 @@ class Entity(ABC):
 
     def __hash__(self):
         return hash(self._key())
+
+    def __str__(self):
+        return str(self._key())
+
+    def __repr__(self):
+        return self.__str__()

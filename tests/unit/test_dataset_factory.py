@@ -22,7 +22,7 @@ class DatasetFactoryTest(TestCase):
         expected_dataset = Dataset(Apk(pkg_name='apk1'), Apk(pkg_name='apk3'))
         evaluator_mock.satisfies.side_effect = lambda apk: apk.pkg_name in ('apk1', 'apk3')
         source_mock.__iter__.side_effect = apks.__iter__
-        actual_dataset = factory.create_dataset(input_criteria)
+        actual_dataset = factory.create_dataset()
         self.assertEqual(expected_dataset, actual_dataset)
         self.assertEqual(evaluator_mock.satisfies.call_count, 3)
 

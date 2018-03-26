@@ -7,9 +7,9 @@ from modules.services.url_constructor import UrlConstructor
 class UrlConstructorTest(unittest.TestCase):
 
     def test_create_url(self):
-        url = UrlConstructor(r'http:\\azoo.com\?key={}&sha={}', key='mykey').construct(Apk(sha256=123))
+        url = UrlConstructor(base_url=r'http:\\azoo.com\?key={}&sha={}', key='mykey').construct(Apk(sha256=123))
         self.assertEqual(url, r'http:\\azoo.com\?key=mykey&sha=123')
-        url = UrlConstructor(r'http:\\azoo.com\?key={}&sha={}', key='mykey').construct(Apk(sha256=456))
+        url = UrlConstructor(base_url=r'http:\\azoo.com\?key={}&sha={}', key='mykey').construct(Apk(sha256=456))
         self.assertEqual(url, r'http:\\azoo.com\?key=mykey&sha=456')
 
 

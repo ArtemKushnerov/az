@@ -2,8 +2,8 @@ import logging.config
 
 import yaml
 
-from modules import adownloader
 import config
+from modules import adownloader
 from modules.entities.criteria import Criteria
 
 
@@ -14,7 +14,7 @@ def setup_logging():
 
 def main():
     criteria = Criteria.init_from_dict(config.criteria)
-    adownloader.run(config.input_file, config.base_url, config.key, config.number, criteria, out_dir=config.output_dir, metadata=config.metadata)
+    adownloader.run(config.input_file, config.key, config.number, criteria, out_dir=config.output_dir, metadata=config.metadata)
 
 
 if __name__ == '__main__':

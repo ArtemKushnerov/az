@@ -11,11 +11,11 @@ from modules.services.url_constructor import UrlConstructor
 
 
 class DatasetDownloader:
-    def __init__(self, dataset, url_constructor=None, base_url='', key='', out_dir='azoo_dataset'):
+    def __init__(self, dataset, url_constructor=None, key='', out_dir='azoo_dataset'):
         self.dataset = dataset
         self.out_dir = out_dir
         if not url_constructor:
-            url_constructor = UrlConstructor(base_url, key)
+            url_constructor = UrlConstructor(key)
         self.url_constructor = url_constructor
 
     def download(self):

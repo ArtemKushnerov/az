@@ -1,8 +1,12 @@
+import logging.config
+import os
 import shutil
 import unittest
 
-import os
+import yaml
+from click.testing import CliRunner
 
+import cli
 from modules import adownloader
 from modules.entities.criteria import Criteria
 
@@ -10,22 +14,33 @@ from modules.entities.criteria import Criteria
 class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
-        if os.path.exists('azoo_dataset'):
-            shutil.rmtree('azoo_dataset')
+        self.out = 'out'
+        if os.path.exists(self.out):
+            shutil.rmtree(self.out)
+        with open('../../logging.yaml') as f:
+            logging.config.dictConfig(yaml.safe_load(f.read()))
+        self.expected_out_dir_contents = ['com.bz.solo.theme.gray.dim.apk', 'com.GoldStudio.TurtleParkour.apk', 'com.kbf.app27730661.apk', 'com.nicescreen.screenlock.ak47HD.apk',
+                                          'com.zabuzalabs.balloonbowarrow_football.apk', 'metadata.csv']
 
-    def test_full_scenario(self):
+    def test_from_cli(self):
+        runner = CliRunner()
+        runner.invoke(cli.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', self.out, '-sd', '1'], catch_exceptions=False)
+        out_dir_contents = os.listdir(self.out)
+        self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
+
+    def test_from_config(self):
         config = {
             'dex_date': {'from': '2015-12-11'},
             'markets': {'play.google.com'},
         }
         metadata = ['sha256', 'pkg_name', 'apk_size', 'dex_date', 'markets']
-        input_file = r'latest_first50.csv'
-        base_url = 'https://androzoo.uni.lu/api/download?apikey={0}&sha256={01}'
+        input_file = 'resources/latest_first50.csv'
         api_key = '98da5f71867dcfd6cd7878435c29a0f94bb8862c63d65439fdb862a93151c831'
         apk_number = 5
         criteria = Criteria.init_from_dict(config)
-        adownloader.run(input_file, base_url, api_key,
-                        apk_number, criteria, metadata, out_dir='azoo_dataset')
+        adownloader.run(input_file, api_key, apk_number, criteria, metadata, out_dir=self.out, seed=1)
+        out_dir_contents = os.listdir(self.out)
+        self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
 
 
 if __name__ == '__main__':

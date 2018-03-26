@@ -1,5 +1,5 @@
 class UrlConstructor:
-    def __init__(self, base_url='', key=''):
+    def __init__(self, key='', base_url='https://androzoo.uni.lu/api/download?apikey={0}&sha256={01}'):
         self.base_url = base_url
         self.key = key
 

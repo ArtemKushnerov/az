@@ -8,8 +8,8 @@ class Criteria(Entity):
         self.dex_date = DateBoundedValue(dex_date_from, dex_date_to)
         self.apk_size = IntBoundedValue(apk_size_from, apk_size_to)
         self.vt_detection = IntBoundedValue(vt_detection_from, vt_detection_to)
-        self.markets = set(markets)
-        self.pkg_name = set(pkg_name)
+        self.markets = set(markets) if markets else None
+        self.pkg_name = set(pkg_name) if pkg_name else None
 
     @classmethod
     def init_from_dict(cls, config_dict=None):

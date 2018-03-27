@@ -1,15 +1,6 @@
-import logging.config
-
-import yaml
-
 import config
-from modules import adownloader
+from modules import adownloader, logging_util
 from modules.entities.criteria import Criteria
-
-
-def setup_logging():
-    with open('logging.yaml') as f:
-        logging.config.dictConfig(yaml.safe_load(f.read()))
 
 
 def main():
@@ -18,5 +9,5 @@ def main():
 
 
 if __name__ == '__main__':
-    setup_logging()
+    logging_util.setup_logging()
     main()

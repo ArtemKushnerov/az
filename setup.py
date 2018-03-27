@@ -6,7 +6,7 @@ setup(
     version='0.0.1',
     entry_points={
         'console_scripts': [
-            'az=main:cli'
+            'az=cli:run'
         ]
     }
 )

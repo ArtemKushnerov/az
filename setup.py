@@ -10,6 +10,10 @@ setup(
         ]
     },
     install_requires=[
-        'click==6.7', 'setuptools==38.5.1', 'python_dateutil==2.7.2', ' PyYAML==3.12'
+        'click==6.7',
+        'setuptools==38.5.1',
+        'python_dateutil==2.7.2',
+        ' PyYAML==3.12'
+        ,'requests=2.18.4'
     ]
 )

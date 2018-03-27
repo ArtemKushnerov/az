@@ -6,6 +6,6 @@ number = 500
 metadata = ['sha256', 'pkg_name', 'apk_size', 'dex_date', 'markets']
 criteria = {
     'dex_date': {'from': '11-12-2015'},
-    # use curly braces for markets(e.g. set)
+    # use curly braces for markets(i.e. set)
     'markets': {'play.google.com'},
 }

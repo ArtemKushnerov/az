@@ -8,5 +8,8 @@ setup(
         'console_scripts': [
             'az=cli:run'
         ]
-    }
+    },
+    install_requires=[
+        'click==6.7', 'setuptools==38.5.1', 'python_dateutil==2.7.2', ' PyYAML==3.12'
+    ]
 )

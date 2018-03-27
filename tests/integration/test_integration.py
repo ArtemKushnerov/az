@@ -3,7 +3,6 @@ import os
 import shutil
 import unittest
 
-import yaml
 from click.testing import CliRunner
 
 import cli
@@ -17,8 +16,7 @@ class IntegrationTest(unittest.TestCase):
         self.out = 'out'
         if os.path.exists(self.out):
             shutil.rmtree(self.out)
-        with open('../../logging.yaml') as f:
-            logging.config.dictConfig(yaml.safe_load(f.read()))
+        logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
         self.expected_out_dir_contents = ['com.bz.solo.theme.gray.dim.apk', 'com.GoldStudio.TurtleParkour.apk', 'com.kbf.app27730661.apk', 'com.nicescreen.screenlock.ak47HD.apk',
                                           'com.zabuzalabs.balloonbowarrow_football.apk', 'metadata.csv']
 

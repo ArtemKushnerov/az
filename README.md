@@ -35,7 +35,7 @@ Request the api key from androzoo, download and uncompress the input file from h
   -s, --apksize TEXT       Apk size, in bytes  
   -vt, --vtdetection TEXT  Virus total rating, integer  
   -pn, --pkgname TEXT      Package names  
-  -m, --markets TEXT       Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents')  
+  -m, --markets TEXT       Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents'  
   -md, --metadata TEXT     Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets  
   -o, --out TEXT           Output folder name. By default current directory  
   -sd, --seed INTEGER      Seed for a random algorithm  

@@ -1,7 +1,7 @@
 import unittest
 
 from modules.entities.apk import Apk
-from modules.entities.dataset import Dataset
+from modules.entities.dataset.dataset import Dataset
 
 
 class DatasetTest(unittest.TestCase):

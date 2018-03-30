@@ -14,8 +14,8 @@ class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
         logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
-        self.expected_out_dir_contents = ['com.bz.solo.theme.gray.dim.apk', 'com.GoldStudio.TurtleParkour.apk', 'com.kbf.app27730661.apk', 'com.nicescreen.screenlock.ak47HD.apk',
-                                          'com.zabuzalabs.balloonbowarrow_football.apk', 'metadata.csv']
+        self.expected_out_dir_contents = ['com.auctionmobility.auctions.vinpresariowineauctions.apk', 'com.ncbhk.mortgage.android.hk.apk', 'com.netpulse.mobile.creekbridgefitness.apk', 'com.smartsound.skeeperheart.apk', 'com.zabuzalabs.balloonbowarrow_football.apk', 'metadata.csv']
+
 
     def test_from_cli(self):
         self.out_cli = 'out/cli'

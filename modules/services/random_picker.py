@@ -1,8 +1,6 @@
-import logging
 import random
 
-from modules.entities.dataset import Dataset
-from modules.exceptions import EmptyDatasetException
+from modules.entities.dataset.dataset import Dataset
 
 
 class RandomPicker:
@@ -11,15 +9,12 @@ class RandomPicker:
             random.seed(seed)
 
     def get_random_subset(self, input_dataset, requested_size):
-        logging.info(f'CHOOSE RANDOM SUBSET OF {requested_size}')
-        if input_dataset.is_empty():
-            raise EmptyDatasetException()
-        if len(input_dataset) < requested_size:
-            logging.warning('Input dataset size less than requested random subset size, returning copy of input dataset')
-            return Dataset(*input_dataset.apks)
-        unique_random_apks = set()
-        subset_size = min(len(input_dataset), requested_size)
-        while len(unique_random_apks) != subset_size:
-            apk = random.choice(input_dataset.apks)
-            unique_random_apks.add(apk)
-        return Dataset(*unique_random_apks)
+        result = []
+        for num, apk in enumerate(input_dataset, 1):
+            if len(result) < requested_size:
+                result.append(apk)
+            else:
+                s = int(random.random() * num)
+                if s < requested_size:
+                    result[s] = apk
+        return Dataset(*result)

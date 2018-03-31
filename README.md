@@ -1,4 +1,8 @@
-Downloads apks from androzoo repository https://androzoo.uni.lu/
+Downloads specified number of **randomly chosen** apks satisfying specified criteria from androzoo repository.  
+Saves specified metadata to *metadata.csv*. dexdate,apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
+One of the bounds can be omitted (i.e. you can write :upper or lower:)  
+pkgname, markets, metadata can be either single values or comma separated lists. 
+  
 
 ### INSTALLATION
 
@@ -11,22 +15,12 @@ input_file=%PATH_TO_INPUT_FILE%
 ```
 Request the api key from androzoo, download and uncompress the input file from here https://androzoo.uni.lu/lists
 
-### USAGE  
-
-##### az [OPTIONS]
-
-  Downloads specified number of apks satisfying specified criteria from androzoo repository.  
-  Saves specified metadata to *metadata.csv*. dexdate,apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
-  One of the bounds can be omitted (i.e. you can write :upper or lower:)  
-  pkgname, markets, metadata can be either single values or comma separated lists. 
-  
-##### Sample usage:
+### SAMPLE USAGE  
 
   `az -n 10 -d 2015-12-11: -s :3000000  -m play.google.com,appchina`
 
-  This means: download 10 apks with the dexdate starting from the
-  2015-12-11 (inclusive), size up to 3000000 bytes (inclusive) and present on
-  either play.google.com or appchina
+This means: download 10 apks with the dexdate starting from the
+2015-12-11 (inclusive), size up to 3000000 bytes (inclusive) and present on either play.google.com or appchina
 
 ##### Options:  
 ```

@@ -1,5 +1,8 @@
 Downloads apks from androzoo repository https://androzoo.uni.lu/
 
+### PREREQUISITES
+Python 3
+
 ### INSTALLATION
 
 1. `pip install -e git+https://gitlab.com/comma-project/adownloader.git@v1.0.1#egg=az`

@@ -38,7 +38,7 @@ class IntegrationTest(unittest.TestCase):
         }
         metadata = ['sha256', 'pkg_name', 'apk_size', 'dex_date', 'markets']
         input_file = 'resources/latest_first50.csv'
-        api_key = '***REMOVED***'
+        api_key = '98da5f71867dcfd6cd7878435c29a0f94bb8862c63d65439fdb862a93151c831'
         apk_number = 5
         criteria = Criteria.init_from_dict(config)
         adownloader.run(input_file, api_key, apk_number, criteria, metadata, out_dir=self.out_config, seed=1)

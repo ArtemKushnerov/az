@@ -72,6 +72,14 @@ class CriteriaTest(unittest.TestCase):
         self.assertTrue(evaluator.satisfies_sha256(Apk(sha256='456')))
         self.assertFalse(evaluator.satisfies_sha256(Apk(sha256='035')))
         self.assertFalse(evaluator.satisfies_sha256(Apk()))
+        
+    def test_sha1(self):
+        evaluator = ApkEvaluator(Criteria(sha1={'123', '456'}))
+        self.assertTrue(evaluator.satisfies_sha1(Apk(sha1='123')))
+        self.assertFalse(evaluator.satisfies_sha1(Apk(sha1='789')))
+        self.assertTrue(evaluator.satisfies_sha1(Apk(sha1='456')))
+        self.assertFalse(evaluator.satisfies_sha1(Apk(sha1='035')))
+        self.assertFalse(evaluator.satisfies_sha1(Apk()))
 
     def test_all(self):
         evaluator = ApkEvaluator(Criteria(dex_date_from='2016-3-3 00:00:01', dex_date_to='2016-3-5 23:59:59',

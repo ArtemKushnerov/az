@@ -13,3 +13,9 @@ class CliTest(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.run, ['--sha256', '42'], catch_exceptions=False)
         self.assertNotEqual(result.output.strip(), 'Error: no such option: --sha256')
+
+    @mock.patch("modules.adownloader.run")
+    def test_sha1(self, mock_run):
+        runner = CliRunner()
+        result = runner.invoke(cli.run, ['--sha1', '42'], catch_exceptions=False)
+        self.assertNotEqual(result.output.strip(), 'Error: no such option: --sha1')

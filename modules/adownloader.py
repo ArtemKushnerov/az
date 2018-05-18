@@ -9,7 +9,7 @@ from modules.services.random_picker import RandomPicker
 
 
 def run(input_file, key, number, criteria, metadata, out_dir='azoo_dataset', seed=None):
-    logging.info(f'START. APKS TO DOWNLOAD: {number}')
+    logging.info(f'START. APKS TO DOWNLOAD: {str(number)}')
     source = None
     try:
         source = Source(input_file=input_file)

@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -7,10 +8,11 @@ from modules import adownloader, logging_util
 from modules.cli.parser import Parser
 from modules.cli.user_config import UserConfig
 from modules.entities.criteria import Criteria
+from modules.enums import DownloadType
 
 
 @click.command()
-@click.option('--number', '-n', type=click.INT, help='Number of apks to download.')
+@click.option('--number', '-n', default=DownloadType.ALL, help='Number of apks to download.')
 @click.option('--dexdate', '-d', help='The date on a dex file, format %Y-%m-%d, e.g. 2015-10-03')
 @click.option('--apksize', '-s', help='Apk size, in bytes')
 @click.option('--vtdetection', '-vt', help='Virus total rating, integer')

@@ -25,3 +25,16 @@ class CliTest(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.run, ['--md5', '42'], catch_exceptions=False)
         self.assertNotEqual(result.output.strip(), 'Error: no such option: --md5')
+
+    @mock.patch("modules.adownloader.run")
+    def test_one_hashing_algorithm_is_specified(self, mock_run):
+        runner = CliRunner()
+        result = runner.invoke(cli.run, ['--md5', '42', '--sha256', '8'], catch_exceptions=False)
+        self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
+        result = runner.invoke(cli.run, ['--md5', '42', '--sha1', '8'], catch_exceptions=False)
+        self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
+        result = runner.invoke(cli.run, ['--sha256', '42', '--sha1', '8'], catch_exceptions=False)
+        self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
+        result = runner.invoke(cli.run, ['--sha256', '42', '--sha1', '8', '--md5', '9'], catch_exceptions=False)
+        self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
+

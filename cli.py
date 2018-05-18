@@ -1,4 +1,3 @@
-import logging
 import os
 import sys
 
@@ -7,6 +6,7 @@ import click
 from modules import adownloader, logging_util
 from modules.cli.parser import Parser
 from modules.cli.user_config import UserConfig
+from modules.cli.validator import Validator
 from modules.entities.criteria import Criteria
 from modules.enums import DownloadType
 
@@ -35,8 +35,10 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
 
     This means: download 10 apks with the dexdate starting from the 2015-12-11(inclusive), size up to 3000000 bytes(inclusive) and present on either play.google.com or appchina
      """
+    args = dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5
+    Validator(*args).validate()
     logging_util.setup_logging()
-    *criteria_args, metadata = Parser(dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5).parse()
+    *criteria_args, metadata = Parser(*args).parse()
     criteria = Criteria(*criteria_args)
     user_config = UserConfig()
     adownloader.run(user_config.input_file, user_config.key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)

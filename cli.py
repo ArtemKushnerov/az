@@ -18,7 +18,7 @@ from modules.enums import DownloadType
 @click.option('--vtdetection', '-vt', help='Virus total rating, integer')
 @click.option('--pkgname', '-pn', help='Package names')
 @click.option('--markets', '-m', help='Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents')
-@click.option('--sha256', help='Sha256 hash')
+@click.option('--sha256', help='SHA256 hashes of apks to download')
 @click.option('--metadata', '-md', help='Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets')
 @click.option('--out', '-o', help='Output folder name. By default current directory')
 @click.option('--seed', '-sd', type=click.INT, help='Seed for a random algorithm')

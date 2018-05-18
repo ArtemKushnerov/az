@@ -65,14 +65,24 @@ class CriteriaTest(unittest.TestCase):
         self.assertFalse(evaluator.satisfies_markets(Apk(markets='onemore.chinese.market')))
         self.assertFalse(evaluator.satisfies_markets(Apk()))
 
+    def test_sha256(self):
+        evaluator = ApkEvaluator(Criteria(sha256={'123', '456'}))
+        self.assertTrue(evaluator.satisfies_sha256(Apk(sha256='123')))
+        self.assertFalse(evaluator.satisfies_sha256(Apk(sha256='789')))
+        self.assertTrue(evaluator.satisfies_sha256(Apk(sha256='456')))
+        self.assertFalse(evaluator.satisfies_sha256(Apk(sha256='035')))
+        self.assertFalse(evaluator.satisfies_sha256(Apk()))
+
     def test_all(self):
         evaluator = ApkEvaluator(Criteria(dex_date_from='2016-3-3 00:00:01', dex_date_to='2016-3-5 23:59:59',
                                           apk_size_from=1, apk_size_to=4,
                                           pkg_name=['pkg1', 'pkg2'],
                                           vt_detection_from=1, vt_detection_to=5,
-                                          markets={'market1', 'market2'}))
-        self.assertTrue(evaluator.satisfies(Apk(dex_date='2016-3-4 17:58:00', apk_size=3, pkg_name='pkg1', vt_detection=3, markets='market1')))
-        self.assertTrue(evaluator.satisfies(Apk(dex_date='2016-3-3 17:58:00', apk_size=4, pkg_name='pkg2', vt_detection=4, markets='market1|market2')))
+                                          markets={'market1', 'market2'},
+                                          sha256={'adf', '789'}))
+        self.assertTrue(evaluator.satisfies(Apk(dex_date='2016-3-4 17:58:00', apk_size=3, pkg_name='pkg1', vt_detection=3, markets='market1', sha256='adf')))
+        self.assertTrue(evaluator.satisfies(Apk(dex_date='2016-3-3 17:58:00', apk_size=4, pkg_name='pkg2', vt_detection=4, markets='market1|market2', sha256='789')))
+        self.assertFalse(evaluator.satisfies(Apk(dex_date='2016-3-3 17:58:00', apk_size=4, pkg_name='pkg2', vt_detection=4, markets='market1|market2')))
         self.assertFalse(evaluator.satisfies(Apk(dex_date='2016-3-4 17:58:00', apk_size=5, pkg_name='pkg1', vt_detection=3, markets='market1')))
         self.assertFalse(evaluator.satisfies(Apk(dex_date='2016-3-4 17:58:00', apk_size=3, pkg_name='pkg3', vt_detection=3, markets='market1')))
         self.assertFalse(evaluator.satisfies(Apk(dex_date='2016-3-4 17:58:00', apk_size=3, pkg_name='pkg1', vt_detection=0, markets='market1')))

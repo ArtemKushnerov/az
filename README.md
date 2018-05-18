@@ -1,7 +1,7 @@
 Downloads specified number of **randomly chosen** apks satisfying specified criteria from androzoo repository.  
 Saves specified metadata to *metadata.csv*. dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
 One of the bounds can be omitted (i.e. you can write :upper or lower:)  
-pkgname, markets, metadata, sha256 can be either single values or comma separated lists. 
+pkgname, markets, metadata, sha256, sha1, md5 can be either single values or comma separated lists. 
   
 
 ### PREREQUISITES
@@ -33,7 +33,9 @@ This means: download 10 apks with the dexdate starting from the
   -vt, --vtdetection TEXT  Virus total rating, integer  
   -pn, --pkgname TEXT      Package names  
   -m, --markets TEXT       Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents'
-  --sha256 TEXT            SHA256 hashes  
+  --sha256 TEXT            SHA256 hashes
+  --sha1 TEXT              SHA1 hashes of apks to download
+  --md5 TEXT               MD5 hashes of apks to download
   -md, --metadata TEXT     Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets  
   -o, --out TEXT           Output folder name. By default current directory  
   -sd, --seed INTEGER      Seed for a random algorithm  

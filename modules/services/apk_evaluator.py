@@ -11,7 +11,7 @@ class ApkEvaluator:
     def satisfies(self, apk):
         if not apk:
             return False
-        return self.satisfies_sha256(apk) and self.satisfies_sha1(apk) and self.satisfies_markets(apk) and self.satisfies_size(apk)\
+        return self.satisfies_sha256(apk) and self.satisfies_sha1(apk) and self.satisfies_md5(apk) and self.satisfies_markets(apk) and self.satisfies_size(apk)\
             and self.satisfies_date(apk) and self.satisfies_name(apk) and self.satisfies_vt_detection(apk)
 
     def satisfies_markets(self, apk):
@@ -30,6 +30,12 @@ class ApkEvaluator:
         satisfies = True
         if self.criteria.sha1:
             satisfies = apk.sha1 in self.criteria.sha1
+        return satisfies
+
+    def satisfies_md5(self, apk):
+        satisfies = True
+        if self.criteria.md5:
+            satisfies = apk.md5 in self.criteria.md5
         return satisfies
 
     def satisfies_vt_detection(self, apk):

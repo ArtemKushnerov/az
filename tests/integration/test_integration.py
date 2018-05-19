@@ -6,8 +6,6 @@ import unittest
 from click.testing import CliRunner
 
 import cli
-from modules import adownloader
-from modules.entities.criteria import Criteria
 
 
 class IntegrationTest(unittest.TestCase):
@@ -16,33 +14,15 @@ class IntegrationTest(unittest.TestCase):
         logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
         self.expected_out_dir_contents = ['com.auctionmobility.auctions.vinpresariowineauctions.apk', 'com.ncbhk.mortgage.android.hk.apk', 'com.netpulse.mobile.creekbridgefitness.apk', 'com.smartsound.skeeperheart.apk', 'com.zabuzalabs.balloonbowarrow_football.apk', 'metadata.csv']
 
-
     def test_from_cli(self):
-        self.out_cli = 'out/cli'
-        if os.path.exists(self.out_cli):
-            shutil.rmtree(self.out_cli)
+        out_dir = 'out'
+        if os.path.exists(out_dir):
+            shutil.rmtree(out_dir)
+        os.mkdir(out_dir)
 
         runner = CliRunner()
-        runner.invoke(cli.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', self.out_cli, '-sd', '1'], catch_exceptions=False)
-        out_dir_contents = os.listdir(self.out_cli)
-        self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
-
-    def test_from_config(self):
-        self.out_config = 'out/config'
-        if os.path.exists(self.out_config):
-            shutil.rmtree(self.out_config)
-
-        config = {
-            'dex_date': {'from': '2015-12-11'},
-            'markets': {'play.google.com'},
-        }
-        metadata = ['sha256', 'pkg_name', 'apk_size', 'dex_date', 'markets']
-        input_file = 'resources/latest_first50.csv'
-        api_key = '98da5f71867dcfd6cd7878435c29a0f94bb8862c63d65439fdb862a93151c831'
-        apk_number = 5
-        criteria = Criteria.init_from_dict(config)
-        adownloader.run(input_file, api_key, apk_number, criteria, metadata, out_dir=self.out_config, seed=1)
-        out_dir_contents = os.listdir(self.out_config)
+        runner.invoke(cli.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', out_dir, '-sd', '1'], catch_exceptions=False)
+        out_dir_contents = os.listdir(out_dir)
         self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
 
 

@@ -37,4 +37,6 @@ class CliTest(unittest.TestCase):
         self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
         result = runner.invoke(cli.run, ['--sha256', '42', '--sha1', '8', '--md5', '9'], catch_exceptions=False)
         self.assertEqual(result.output.strip(), 'Please specify only one hashing algorithm')
+        result = runner.invoke(cli.run, ['-n', '5'], catch_exceptions=False)
+        self.assertNotEqual(result.output.strip(), 'Please specify only one hashing algorithm')
 

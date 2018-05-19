@@ -12,7 +12,7 @@ from modules.enums import DownloadType
 
 
 @click.command()
-@click.option('--number', '-n', default=DownloadType.ALL, help='Number of apks to download.')
+@click.option('--number', '-n', type=click.INT, help='Number of apks to download.')
 @click.option('--dexdate', '-d', help='The date on a dex file, format %Y-%m-%d, e.g. 2015-10-03')
 @click.option('--apksize', '-s', help='Apk size, in bytes')
 @click.option('--vtdetection', '-vt', help='Virus total rating, integer')
@@ -35,10 +35,10 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
 
     This means: download 10 apks with the dexdate starting from the 2015-12-11(inclusive), size up to 3000000 bytes(inclusive) and present on either play.google.com or appchina
      """
-    args = dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5
+    args = number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5
     Validator(*args).validate()
     logging_util.setup_logging()
-    *criteria_args, metadata = Parser(*args).parse()
+    number, *criteria_args, metadata = Parser(*args).parse()
     criteria = Criteria(*criteria_args)
     user_config = UserConfig()
     adownloader.run(user_config.input_file, user_config.key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)

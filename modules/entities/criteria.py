@@ -14,44 +14,6 @@ class Criteria(Entity):
         self.sha1 = set(sha1) if sha1 else None
         self.md5 = set(md5) if md5 else None
 
-    @classmethod
-    def init_from_dict(cls, config_dict=None):
-        criteria = Criteria()
-        #rewrite with blabla if field else None, which is more elegans
-        if config_dict:
-            dex_date = config_dict.get('dex_date')
-            if dex_date:
-                criteria.dex_date = DateBoundedValue(dex_date.get('from'), dex_date.get('to'))
-
-            apk_size = config_dict.get('apk_size')
-            if apk_size:
-                criteria.apk_size = IntBoundedValue(apk_size.get('from'), apk_size.get('to'))
-
-            vt_detection = config_dict.get('vt_detection')
-            if vt_detection:
-                criteria.vt_detection = IntBoundedValue(vt_detection.get('from'), vt_detection.get('to'))
-
-            markets = config_dict.get('markets')
-            if markets:
-                criteria.markets = set(markets)
-
-            pkg_name = config_dict.get('pkg_name')
-            if pkg_name:
-                criteria.pkg_name = set(pkg_name)
-
-            sha256 = config_dict.get('sha256')
-            if sha256:
-                criteria.sha256 = set(sha256)
-
-            sha1 = config_dict.get('sha1')
-            if sha1:
-                criteria.sha1 = set(sha1)
-
-            md5 = config_dict.get('md5')
-            if md5:
-                criteria.sha1 = set(md5)
-        return criteria
-
     def _key(self):
         return self.dex_date, self.apk_size, self.vt_detection, self.markets, self.pkg_name, self.sha256, self.sha1, self.md5
 

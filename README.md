@@ -9,7 +9,7 @@ Python 3
 
 ### INSTALLATION
 
-1. `pip install -e git+https://github.com/ArtemKushnerov/az.git@v1.0.1#egg=az`
+1. `pip install -e git+https://github.com/ArtemKushnerov/az.git@v1.2.0#egg=az`
 
 2. create *.az* file in your home directory with the following contents:  
 ```

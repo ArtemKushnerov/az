@@ -24,6 +24,7 @@ from modules.enums import DownloadType
 @click.option('--metadata', '-md', help='Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets')
 @click.option('--out', '-o', help='Output folder name. By default current directory')
 @click.option('--seed', '-sd', type=click.INT, help='Seed for a random algorithm')
+@click.version_option()
 def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5):
     """Downloads specified number of apks satisfying specified criteria from androzoo repository. Saves specified metadata to metadata.csv.
     dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive. One of the bounds can be omitted (i.e. you can write :upper or lower:)

@@ -5,7 +5,7 @@ import unittest
 
 from click.testing import CliRunner
 
-import cli
+import main
 
 
 class IntegrationTest(unittest.TestCase):
@@ -21,7 +21,7 @@ class IntegrationTest(unittest.TestCase):
         os.mkdir(out_dir)
 
         runner = CliRunner()
-        runner.invoke(cli.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', out_dir, '-sd', '1'], catch_exceptions=False)
+        runner.invoke(main.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', out_dir, '-sd', '1'], catch_exceptions=False)
         out_dir_contents = os.listdir(out_dir)
         self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
 

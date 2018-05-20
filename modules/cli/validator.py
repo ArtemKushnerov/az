@@ -1,8 +1,8 @@
-import sys
+from modules.exceptions import ValidationException
 
 
 class Validator:
-    def __init__(self, number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5):
+    def __init__(self, number=None, dexdate=None, apksize=None, vtdetection=None, markets=None, pkgname=None, metadata=None, sha256=None, sha1=None, md5=None):
         self.number = number
         self.dexdate = dexdate
         self.apksize = apksize
@@ -15,15 +15,16 @@ class Validator:
         self.md5 = md5
 
     def validate(self):
-        self.check_number_is_positive_or_none()
+        self.check_number_is_positive()
         self._check_only_one_hash_is_used()
 
     def _check_only_one_hash_is_used(self):
         if (self.sha256 and self.sha1) or (self.sha256 and self.md5) or (self.sha1 and self.md5):
-            sys.exit('Please specify only one hashing algorithm')
+            raise ValidationException('Please specify only one hashing algorithm')
 
-    def check_number_is_positive_or_none(self):
-        if not (self.number > 0 or self.number is None):
-            sys.exit('Number of apks must be positive')
+    def check_number_is_positive(self):
+        # None means download all
+        if not (self.number is None or self.number > 0):
+            raise ValidationException('Number of apks must be positive')
 
 

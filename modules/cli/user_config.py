@@ -20,7 +20,7 @@ class UserConfig:
         api_key, input_file = None, None
         user_config = self.get_user_config()
         if not os.path.exists(user_config):
-            raise AbsentUserConfigException()
+            raise AbsentUserConfigException('Config at ~/.az is not found')
         with open(user_config) as config:
             for line in config:
                 key, value = line.split('=')

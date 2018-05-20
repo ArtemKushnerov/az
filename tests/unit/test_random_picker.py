@@ -2,7 +2,7 @@ import unittest
 
 from modules.entities.apk import Apk
 from modules.entities.dataset.dataset import Dataset
-from modules.adownloader import RandomPicker
+from modules.az import RandomPicker
 
 
 class RandomPickerTest(unittest.TestCase):

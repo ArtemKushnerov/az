@@ -1,10 +1,19 @@
-class EmptyDatasetException(Exception):
+class AzException(Exception):
     pass
 
 
-class AbsentUserConfigException(Exception):
+class EmptyDatasetException(AzException):
     pass
 
 
-class NotDefinedConfigValue(Exception):
+class AbsentUserConfigException(AzException):
     pass
+
+
+class NotDefinedConfigValue(AzException):
+    pass
+
+
+class ValidationException(AzException):
+    pass
+

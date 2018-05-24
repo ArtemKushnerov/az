@@ -9,7 +9,7 @@ from modules.cli.user_config import UserConfig
 from modules.cli.validator import Validator
 from modules.entities.criteria import Criteria
 from modules.enums import DownloadType
-from modules.exceptions import AzException
+from modules.exceptions import AzException, NoArgsException
 
 
 @click.command()
@@ -36,6 +36,7 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
 
     This means: download 10 apks with the dexdate starting from the 2015-12-11(inclusive), size up to 3000000 bytes(inclusive) and present on either play.google.com or appchina
      """
+
     try:
         args = number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5
         Validator(*args).validate()
@@ -44,6 +45,9 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
         criteria = Criteria(*criteria_args)
         user_config = UserConfig()
         az.run(user_config.input_file, user_config.key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)
+    except NoArgsException:
+        with click.Context(run) as ctx:
+            click.echo(run.get_help(ctx))
     except AzException as e:
         sys.exit(str(e))
     sys.exit(0)

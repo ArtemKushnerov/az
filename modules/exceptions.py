@@ -17,3 +17,5 @@ class NotDefinedConfigValue(AzException):
 class ValidationException(AzException):
     pass
 
+class NoArgsException(AzException):
+    pass

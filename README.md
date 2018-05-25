@@ -5,7 +5,7 @@ pkgname, markets, metadata, sha256, sha1, md5 can be either single values or com
   
 
 ### PREREQUISITES
-Python 3
+Python 3.6
 
 ### INSTALLATION
 

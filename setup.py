@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='az',
-    version='1.0.1',
+    version='1.1.0',
     entry_points={
         'console_scripts': [
             'az=main:run'

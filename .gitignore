@@ -71,3 +71,6 @@ venv
 
 tests/integration/out/
 tests/unit/out
+
+# vim swp
+*.swp

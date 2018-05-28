@@ -10,6 +10,9 @@ setup(
         ]
     },
     packages=find_packages(),
+    package_data={
+        '': ['*.yaml'],
+    },
     install_requires=[
         'click==6.7',
         'setuptools==38.5.1',

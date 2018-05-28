@@ -5,5 +5,5 @@ import yaml
 
 
 def setup_logging():
-    with resource_stream('resources', 'logging.yaml') as f:
+    with resource_stream('modules.resources', 'logging.yaml') as f:
         logging.config.dictConfig(yaml.safe_load(f.read()))

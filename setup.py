@@ -6,9 +6,10 @@ setup(
     version='1.1.0',
     entry_points={
         'console_scripts': [
-            'az=main:run'
+            'az=modules.main:run'
         ]
     },
+    packages=find_packages(),
     install_requires=[
         'click==6.7',
         'setuptools==38.5.1',

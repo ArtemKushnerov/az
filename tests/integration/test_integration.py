@@ -5,7 +5,7 @@ import unittest
 
 from click.testing import CliRunner
 
-import main
+from modules import main
 
 
 class IntegrationTest(unittest.TestCase):

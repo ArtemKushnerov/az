@@ -17,8 +17,14 @@ class MetadataSeverTest(unittest.TestCase):
 
     def test_saves_metadata(self):
         dataset = Dataset(Apk(pkg_name='apk1', apk_size=8, dex_date='01-01-2001', markets='play'), Apk(pkg_name='apk2', apk_size=13, dex_date='01-03-2001', markets='play|china'))
-        MetadataSaver(dataset=dataset, out_dir='out').save(['pkg_name', 'apk_size', 'dex_date'])
+        MetadataSaver(dataset=dataset, out_dir='out').save(['pkg_name', 'apk_size', 'dex_date', 'markets'])
+        expected_out = 'pkg_name,apk_size,dex_date,markets\n\
+apk1,8,01-01-2001,play\n\
+apk2,13,01-03-2001,play|china\n\
+'
         self.assertTrue(os.path.exists(r'out\metadata.csv'))
+        with open('out\metadata.csv') as f:
+            self.assertEqual(expected_out, f.read())
 
 
 if __name__ == '__main__':

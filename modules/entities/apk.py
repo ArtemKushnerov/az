@@ -1,6 +1,14 @@
 from modules.entities.entity import Entity
 
 
+class MarketsSet(set):
+    def __init__(self, markets):
+        super().__init__(markets.split('|'))
+
+    def __str__(self):
+        return '|'.join(self)
+
+
 class Apk(Entity):
     def __init__(self, sha256=None, sha1=None, md5=None, dex_date=None, apk_size=None, pkg_name=None, vercode=None, vt_detection=None, vt_scan_date=None, dex_size=None, markets=None):
         self.sha256 = sha256
@@ -13,7 +21,7 @@ class Apk(Entity):
         self.vt_detection = int(vt_detection) if vt_detection else None
         self.vt_scan_date = vt_scan_date
         self.dex_size = int(dex_size) if dex_size else None
-        self.markets = set(markets.split('|')) if markets else None
+        self.markets = MarketsSet(markets) if markets else None
 
     def _key(self):
         return self.sha256

@@ -3,7 +3,7 @@ from unittest import mock
 
 from click.testing import CliRunner
 
-import main
+from modules import main
 
 
 class CliTest(unittest.TestCase):

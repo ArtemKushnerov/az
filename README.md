@@ -18,7 +18,7 @@ and macOS, C:\Users\%USERNAME% on Windows) or in the directory where you want to
 key=%API_KEY%  
 input_file=%PATH_TO_INPUT_FILE%
 ```
-See (#CONFIGURATION) for more on configuration. Alternatively, use cli options `-k` and `-i`
+Alternatively, use cli options `-k` and `-i`
 
 Request the api key from androzoo, download and uncompress the input file from here https://androzoo.uni.lu/lists
 

@@ -10,7 +10,7 @@ Allows downloading in the multiple threads.
 
 ### INSTALLATION
 
-1. `pip install git+https://github.com/ArtemKushnerov/az.git@v1.1.1#egg=az`
+1. `pip install git+https://github.com/ArtemKushnerov/az.git@v1.2.0#egg=az`
 
 2. create *.az* file in your home directory (~ on Linux 
 and macOS, C:\Users\%USERNAME% on Windows) or in the directory where you want to invoke `az` from with the following contents:  

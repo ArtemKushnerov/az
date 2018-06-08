@@ -6,10 +6,10 @@ import click
 from modules import az, logging_util
 from modules.cli.args import Arguments
 from modules.cli.parser import Parser
-from modules.cli.user_config import UserConfig
 from modules.cli.validator import Validator
 from modules.entities.criteria import Criteria
 from modules.exceptions import AzException, NoArgsException
+
 
 
 @click.command()
@@ -41,10 +41,10 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
     This means: download 10 apks with the dexdate starting from the 2015-12-11(inclusive), size up to 3000000 bytes(inclusive) and present on either play.google.com or appchina
      """
 
-    logging_util.setup_logging()
     try:
         args = Arguments(number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5, key, input_file)
         Validator(args).validate()
+        logging_util.setup_logging()
         number, *criteria_args, metadata, key, input_file = Parser(args).parse()
         criteria = Criteria(*criteria_args)
         az.run(input_file, key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)

@@ -40,3 +40,4 @@ class CliTest(unittest.TestCase):
         result = runner.invoke(main.run, ['-n', '5'], catch_exceptions=False)
         self.assertNotEqual(result.output.strip(), 'Please specify only one hashing algorithm')
 
+

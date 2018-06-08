@@ -6,7 +6,7 @@ class MarketsSet(set):
         super().__init__(markets.split('|'))
 
     def __str__(self):
-        return '|'.join(self)
+        return '|'.join(sorted(self))
 
 
 class Apk(Entity):

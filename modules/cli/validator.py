@@ -12,7 +12,7 @@ class Validator:
         self._check_only_one_hash_is_used()
 
     def _check_at_least_one_arg_provided(self):
-        if all(value is None for value in vars(self).values()):
+        if all(value is None for value in vars(self.args).values()):
             raise NoArgsException()
 
     def _check_only_one_hash_is_used(self):

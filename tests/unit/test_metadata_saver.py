@@ -20,7 +20,7 @@ class MetadataSeverTest(unittest.TestCase):
         MetadataSaver(dataset=dataset, out_dir='out').save(['pkg_name', 'apk_size', 'dex_date', 'markets'])
         expected_out = 'pkg_name,apk_size,dex_date,markets\n\
 apk1,8,01-01-2001,play\n\
-apk2,13,01-03-2001,play|china\n\
+apk2,13,01-03-2001,china|play\n\
 '
         self.assertTrue(os.path.exists(r'out\metadata.csv'))
         with open('out\metadata.csv') as f:

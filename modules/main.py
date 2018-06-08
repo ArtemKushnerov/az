@@ -4,11 +4,11 @@ import sys
 import click
 
 from modules import az, logging_util
+from modules.cli.args import Arguments
 from modules.cli.parser import Parser
 from modules.cli.user_config import UserConfig
 from modules.cli.validator import Validator
 from modules.entities.criteria import Criteria
-from modules.enums import DownloadType
 from modules.exceptions import AzException, NoArgsException
 
 
@@ -25,11 +25,14 @@ from modules.exceptions import AzException, NoArgsException
 @click.option('--metadata', '-md', help='Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets')
 @click.option('--out', '-o', help='Output folder name. By default current directory')
 @click.option('--seed', '-sd', type=click.INT, help='Seed for a random algorithm')
+@click.option('--key', '-k', help='Androzoo api key')
+@click.option('--input-file', '-i', help='Path to input csv')
 @click.version_option(message='%(version)s')
-def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5):
+def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5, key, input_file):
     """Downloads specified number of apks satisfying specified criteria from androzoo repository. Saves specified metadata to metadata.csv.
     dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive. One of the bounds can be omitted (i.e. you can write :upper or lower:)
     pkgname, markets, metadata, sha256, sha1, md5 can be either single values or comma separated lists.
+    Key and input file can be specified as options or via local or global config file.
 
     Sample usage:
 
@@ -38,19 +41,19 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
     This means: download 10 apks with the dexdate starting from the 2015-12-11(inclusive), size up to 3000000 bytes(inclusive) and present on either play.google.com or appchina
      """
 
+    logging_util.setup_logging()
     try:
-        args = number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5
-        Validator(*args).validate()
-        logging_util.setup_logging()
-        number, *criteria_args, metadata = Parser(*args).parse()
+        args = Arguments(number, dexdate, apksize, vtdetection, markets, pkgname, metadata, sha256, sha1, md5, key, input_file)
+        Validator(args).validate()
+        number, *criteria_args, metadata, key, input_file = Parser(args).parse()
         criteria = Criteria(*criteria_args)
-        user_config = UserConfig()
-        az.run(user_config.input_file, user_config.key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)
+        az.run(input_file, key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)
     except NoArgsException:
         with click.Context(run) as ctx:
             click.echo(run.get_help(ctx))
     except AzException as e:
         sys.exit(str(e))
-    sys.exit(0)
+    else:
+        sys.exit(0)
 
 

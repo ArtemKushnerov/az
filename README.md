@@ -2,21 +2,29 @@ Downloads specified number of **randomly chosen** apks satisfying specified crit
 Saves specified metadata to *metadata.csv*. dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
 One of the bounds can be omitted (i.e. you can write :upper or lower:)  
 pkgname, markets, metadata, sha256, sha1, md5 can be either single values or comma separated lists. 
+Key and input file can be specified as options or via local or global config file.
   
 
 ### PREREQUISITES
-Python 3.6
+- Python 3.6
 
 ### INSTALLATION
 
 1. `pip install git+https://github.com/ArtemKushnerov/az.git@v1.1.1#egg=az`
 
-2. create *.az* file in your home directory with the following contents:  
+2. create *.az* file in your home directory (~ on Linux 
+and macOS, C:\Users\%USERNAME% on Windows) or in the directory where you want to invoke `az` from with the following contents:  
 ```
 key=%API_KEY%  
 input_file=%PATH_TO_INPUT_FILE%
 ```
+See (#CONFIGURATION) for more on configuration. Alternatively, use cli options `-k` and `-i`
+
 Request the api key from androzoo, download and uncompress the input file from here https://androzoo.uni.lu/lists
+
+### CONFIGURATION
+You can configure api key and input file either using cli options or *.az* configuration file. The file can be placed locally (in directory where you want to invoke `az` from) or globally (in your home directory).
+The precedence for reading config values is as follows: cli -> local-> global.
 
 ### SAMPLE USAGE  
 

@@ -50,5 +50,6 @@ This means: download 10 apks with the dexdate starting from the
   -k, --key TEXT           Androzoo api key.
   -i, --input-file TEXT    Path to input csv.
   -t, --threads INTEGER    Number of threads for concurrent download. 4 by default.
+  --version                Show the version and exit.
   --help                   Show this message and exit.  
 ```

@@ -3,7 +3,7 @@ Saves specified metadata to *metadata.csv*. dexdate, apksize and vtdetection req
 One of the bounds can be omitted (i.e. you can write :upper or lower:)  
 pkgname, markets, metadata, sha256, sha1, md5 can be either single values or comma separated lists. 
 Key and input file can be specified as options or via local or global config file.
-  
+Allows downloading in the multiple threads.
 
 ### PREREQUISITES
 - Python 3.6
@@ -35,17 +35,20 @@ This means: download 10 apks with the dexdate starting from the
 
 ##### Options:  
 ```
-  -n, --number INTEGER     Number of apks to download.  
-  -d, --dexdate TEXT       The date on a dex file, format %Y-%m-%d, e.g.  2015-10-03
-  -s, --apksize TEXT       Apk size, in bytes  
-  -vt, --vtdetection TEXT  Virus total rating, integer  
-  -pn, --pkgname TEXT      Package names  
-  -m, --markets TEXT       Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents'
-  --sha256 TEXT            SHA256 hashes
-  --sha1 TEXT              SHA1 hashes of apks to download
-  --md5 TEXT               MD5 hashes of apks to download
-  -md, --metadata TEXT     Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets  
-  -o, --out TEXT           Output folder name. By default current directory  
-  -sd, --seed INTEGER      Seed for a random algorithm  
+  -n, --number INTEGER     Number of apks to download.
+  -d, --dexdate TEXT       The date on a dex file, format %Y-%m-%d, e.g.  2015-10-03.
+  -s, --apksize TEXT       Apk size, in bytes.
+  -vt, --vtdetection TEXT  Virus total rating, integer.
+  -pn, --pkgname TEXT      Package names.
+  -m, --markets TEXT       Markets, e.g. play.google.com. Possible values (can differ, since repository is updating): 1mobile,angeeks,anzhi,apk_bang,appchina,fdroid,freewarelovers,genome,hiapk,markets,mi.com,play.google.com,proandroid,slideme,torrents.
+  --sha256 TEXT            SHA256 hashes.
+  --sha1 TEXT              SHA1 hashes of apks to download.
+  --md5 TEXT               MD5 hashes of apks to download.
+  -md, --metadata TEXT     Metadata. This is a subset of latest.csv column names to keep in metadata.csv. By default sha256,pkg_name,apk_size,dex_date,markets.  
+  -o, --out TEXT           Output folder name. By default current directory.
+  -sd, --seed INTEGER      Seed for a random algorithm.
+  -k, --key TEXT           Androzoo api key.
+  -i, --input-file TEXT    Path to input csv.
+  -t, --threads INTEGER    Number of threads for concurrent download. 4 by default.
   --help                   Show this message and exit.  
 ```

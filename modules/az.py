@@ -8,7 +8,7 @@ from modules.services.metadata_saver import MetadataSaver
 from modules.services.random_picker import RandomPicker
 
 
-def run(input_file, key, number, criteria, metadata, out_dir='azoo_dataset', seed=None):
+def run(input_file, key, number, criteria, metadata, threads, out_dir='azoo_dataset', seed=None, ):
     logging.info(f'START. APKS TO DOWNLOAD: {str(number)}')
     source = None
     try:
@@ -16,7 +16,7 @@ def run(input_file, key, number, criteria, metadata, out_dir='azoo_dataset', see
 
         dataset = FilteredDataset(source, criteria)
         random_subset = RandomPicker(seed=seed).get_random_subset(dataset, number)
-        DatasetDownloader(dataset=random_subset, out_dir=out_dir, key=key).download()
+        DatasetDownloader(dataset=random_subset, out_dir=out_dir, key=key, threads=threads).download()
 
         MetadataSaver(random_subset, out_dir).save(metadata)
     except KeyboardInterrupt:

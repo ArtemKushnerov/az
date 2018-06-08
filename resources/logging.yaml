@@ -1,6 +1,6 @@
 version: 1
 root:
-  level: INFO
+  level: DEBUG
   handlers: [console, file]
 
 formatters:

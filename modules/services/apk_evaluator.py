@@ -67,10 +67,10 @@ class ApkEvaluator:
     @staticmethod
     def satisfies_bounds(value, bounded_value):
         satisfies = True
-        if value:
-            if bounded_value.lower:
+        if value is not None:
+            if bounded_value.lower is not None:
                 satisfies = satisfies and bounded_value.lower <= value
-            if bounded_value.upper:
+            if bounded_value.upper is not None:
                 satisfies = satisfies and value <= bounded_value.upper
         else:
             satisfies = False

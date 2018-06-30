@@ -15,7 +15,7 @@ class BoundedValue(Entity):
         return self.lower, self.upper
 
     def __bool__(self):
-        return True if self.lower or self.upper else False
+        return True if self.lower is not None or self.upper is not None else False
 
 
 class DateBoundedValue(BoundedValue):

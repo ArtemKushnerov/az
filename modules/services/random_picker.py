@@ -10,6 +10,7 @@ class RandomPicker:
             random.seed(seed)
 
     def get_random_subset(self, input_dataset, requested_size):
+        """ This is an implementation of a reservoir sampling algorithm """
         result = []
         for num, apk in enumerate(input_dataset, 1):
             if requested_size is DownloadType.ALL or len(result) < requested_size:

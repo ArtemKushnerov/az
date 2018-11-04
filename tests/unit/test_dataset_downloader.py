@@ -15,7 +15,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         self.dataset = Dataset(self.apk, self.apk2)
         self.constructor_mock = mock.create_autospec(UrlConstructor)
         self.constructor_mock.construct.side_effect = lambda apk:' https://'+apk.sha256  # use sha256 of apk as download url, just for a test
-        self.dataset_downloader = DatasetDownloader(self.dataset, url_constructor=self.constructor_mock, out_dir='out')
+        self.dataset_downloader = DatasetDownloader(self.dataset, threads=4, url_constructor=self.constructor_mock, out_dir='out')
 
     @mock.patch('requests.get')
     @mock.patch("modules.services.dataset_downloader.open")
@@ -37,7 +37,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         self.assertEqual(self.constructor_mock.construct.call_args_list, [mock.call(self.apk), mock.call(self.apk2)])
         self.constructor_mock.reset_mock()
         self.assertEqual(get_mock.call_count, 2)
-        self.assertEqual(open_mock.call_args_list, [mock.call(r'out\apk1.apk', 'wb'), mock.call(r'out\apk2.apk', 'wb')])
+        self.assertEqual(open_mock.call_args_list, [mock.call(r'out/apk1.apk', 'wb'), mock.call(r'out/apk2.apk', 'wb')])
 
 
 if __name__ == '__main__':

@@ -22,8 +22,8 @@ class MetadataSeverTest(unittest.TestCase):
 apk1,8,01-01-2001,play\n\
 apk2,13,01-03-2001,china|play\n\
 '
-        self.assertTrue(os.path.exists(r'out\metadata.csv'))
-        with open('out\metadata.csv') as f:
+        self.assertTrue(os.path.exists(r'out/metadata.csv'))
+        with open('out/metadata.csv') as f:
             self.assertEqual(expected_out, f.read())
 
 

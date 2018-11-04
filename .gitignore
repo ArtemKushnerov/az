@@ -76,3 +76,4 @@ tests/unit/out
 *.swp
 
 out/
+.DS_Store

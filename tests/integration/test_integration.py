@@ -8,6 +8,8 @@ from click.testing import CliRunner
 from modules import main
 
 
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
 class IntegrationTest(unittest.TestCase):
 
     def setUp(self):
@@ -21,9 +23,10 @@ class IntegrationTest(unittest.TestCase):
         os.mkdir(out_dir)
 
         runner = CliRunner()
-        runner.invoke(main.run, ['-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', out_dir, '-sd', '1'], catch_exceptions=False)
+        input_file_path = os.path.join(THIS_DIR,'resources/latest_first50.csv')
+        runner.invoke(main.run, ['-i', input_file_path, '-n', '5', '-d', '2015-12-11:', '-m', 'play.google.com', '-o', out_dir, '-sd', '1'], catch_exceptions=False)
         out_dir_contents = os.listdir(out_dir)
-        self.assertEqual(out_dir_contents, self.expected_out_dir_contents)
+        self.assertEqual(set(out_dir_contents), set(self.expected_out_dir_contents))
 
 
 if __name__ == '__main__':

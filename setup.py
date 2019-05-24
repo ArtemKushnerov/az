@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
-        long_description = fh.read()
+    long_description = fh.read()
 
 setup(
-    name='az',
+    name='azoo',
     version='1.2.2',
     author="Artsiom Kushnariou",
     author_email="kushnerovartem@gmail.com",

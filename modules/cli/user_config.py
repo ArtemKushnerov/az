@@ -11,8 +11,10 @@ class UserConfig:
     INPUT_FILE_CONFIG_NAME = 'input_file'
     SEPARATOR = '='
 
-    def __init__(self):
+    def __init__(self, key_arg, in_arg):
         self.key, self.in_file, self._key_local, self._in_local, self._key_global, self._in_global = None, None, None, None, None, None
+        self._key_arg = key_arg
+        self._in_arg = in_arg
         self._err_msg = ''
         self._read_local_config()
         self._read_global_config()
@@ -44,12 +46,12 @@ class UserConfig:
         return api_key, input_file
 
     def _assign_key(self):
-        self.key = self._key_local if self._key_local else self._key_global
+        self.key = self._key_arg or self._key_local or self._key_global
         if not self.key:
             self._err_msg += "Key is not defined. Please, define  configuration parameter 'key' in local or global config"
 
     def _assign_in_file(self):
-        self.in_file = self._in_local if self._in_local else self._in_global
+        self.in_file = self._in_arg or self._in_local or self._in_global
         if not self.in_file:
             self._err_msg += 'Input file is not defined.'
 

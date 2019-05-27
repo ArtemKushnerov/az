@@ -23,7 +23,7 @@ class Parser:
         metadata = self.args.metadata.split(self.LIST_ARGS_DELIMITER) if self.args.metadata else self.METADATA_DEFAULT_VALUE
         key, input_file = self.args.key, self.args.input_file
         if not key or not input_file:
-            user_config = UserConfig()
+            user_config = UserConfig(key, input_file)
             input_file = input_file if input_file else user_config.in_file
             key = key if key else user_config.key
 

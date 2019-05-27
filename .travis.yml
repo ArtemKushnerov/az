@@ -14,4 +14,4 @@ deploy:
   password:
     secure: Go8FblO4Ee7ni4krrVNjnEVmCxDPX8fcd4FehNsY5vpTTyfAwdTGEifLZd/vYnq7/2eaPqVL4piajc+LkYiJtvwkF+/y6NP3TD6h16BIRpaj8lp5GTXMi7/3wbRLirQrwE4IpF/bSLXgPKG1HhHb9F3FEmNuuNT01gt2Z4MY0OufrMltAlQMBxgvd3e9iqKnDKh9iG1tiIMbc+1YLTTmnfyNQiRZsZFhu46NbXKXCCAA6rLmh5mxzZUVWwyQeRaiUBDQiLFCAMw05m4001iL0Y8q/Guk0D9+SJGRmVmcZ1VZ0gWshTlVwYsFJTOQ+b0eE1v/cXgkGhbQAPJXlqExl4KkL/4pv6tTyg3tUjtTWD44iUEH/Tgv0XlUKJ1Ku8HYOMJwR3fwbWatzt3fooGPeklPLakRBpCLS76+g0ifAnNrsyP/FQyZVl2nQeKcnlhmpeLI8+BWq0rZTKB5IzkMSb4wSPvmCH8vAAQ8HVHqMjyUVbpFDwDd0Dwpl8KlkSjut0OIGSv+A+wgXaOeFb4C3OHKNMMpzGvih6vl+i7/GZxmqTIDSvxStPoWvsnl+EJ/ZGsQiBRj30ecRNYjT8BHjjfyAUXCgIY7s+UmZOeEgqxBoyohd/+l/sTjFtyAI+rbtfjRR7oHir/aKJUqTOAm3suT0Izs+sRfZUOQ6/8Dqyo=
   on:
-    branch: travis
+    tags: true

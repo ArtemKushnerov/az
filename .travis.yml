@@ -3,8 +3,10 @@ language: python
 python:
 - '3.6'
 - '3.7'
+before_script:
+  - echo key=$AZOO_KEY > ~/.az
 script:
-- python -m unittest discover tests/unit
+- python -m unittest discover tests
 deploy:
   provider: pypi
   user: artsiom.kushniarou

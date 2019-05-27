@@ -5,7 +5,7 @@ python:
 - '3.7'
 before_script:
   - echo key=$AZOO_KEY > ~/.az
-  - cat ~.az
+  - cat ~/.az
 script:
 - python -m unittest discover tests
 deploy:

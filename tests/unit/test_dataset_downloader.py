@@ -34,10 +34,12 @@ class DatasetDownloaderTest(unittest.TestCase):
     @mock.patch("modules.services.dataset_downloader.requests.get")
     def test_downloads_apks(self, get_mock, open_mock, os_mock):
         self.dataset_downloader.download()
-        self.assertEqual(self.constructor_mock.construct.call_args_list, [mock.call(self.apk), mock.call(self.apk2)])
+        self.assertTrue(mock.call(self.apk) in self.constructor_mock.construct.call_args_list)
+        self.assertTrue(mock.call(self.apk2) in self.constructor_mock.construct.call_args_list)
         self.constructor_mock.reset_mock()
         self.assertEqual(get_mock.call_count, 2)
-        self.assertEqual(open_mock.call_args_list, [mock.call(r'out/apk1.apk', 'wb'), mock.call(r'out/apk2.apk', 'wb')])
+        self.assertTrue(mock.call(r'out/apk1.apk', 'wb') in open_mock.call_args_list)
+        self.assertTrue(mock.call(r'out/apk2.apk', 'wb') in open_mock.call_args_list)
 
 
 if __name__ == '__main__':

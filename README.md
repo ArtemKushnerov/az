@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ArtemKushnerov/az.svg?branch=master)](https://travis-ci.com/ArtemKushnerov/az)
+
 Downloads specified number of **randomly chosen** apks satisfying specified criteria from androzoo repository.  
 Saves specified metadata to *metadata.csv*. dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
 One of the bounds can be omitted (i.e. you can write :upper or lower:)  

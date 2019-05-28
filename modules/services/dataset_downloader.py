@@ -1,11 +1,12 @@
+import asyncio
 import logging
 import os
 import sys
 
-import requests
+import aiofiles
+from aiohttp import ClientSession
 
 from modules.services.url_constructor import UrlConstructor
-from multiprocessing.dummy import Pool
 
 
 class DatasetDownloader:
@@ -22,10 +23,14 @@ class DatasetDownloader:
         if not os.path.exists(self.out_dir):
             os.makedirs(self.out_dir)
 
-        with Pool(self.threads) as pool:
-            pool.map(self.download_apk, self.dataset)
+        asyncio.run(self.download_dataset())
 
-    def download_apk(self, apk):
+    async def download_dataset(self):
+        async with ClientSession() as session:
+            coros = [self.download_apk(apk, session) for apk in self.dataset]
+            await asyncio.wait(coros)
+
+    async def download_apk(self, apk, session):
         apk_save_path = os.path.join(self.out_dir, apk.pkg_name) + '.apk'
         try:
             if os.path.exists(apk_save_path):
@@ -33,11 +38,11 @@ class DatasetDownloader:
                 logging.warning(f'apk with pkg {apk.pkg_name} already exists, saving by {apk_save_path}')
             logging.debug(f'DOWNLOAD {apk.pkg_name}... ')
             apk_url = self.url_constructor.construct(apk)
-            response = requests.get(apk_url)
-            with open(apk_save_path, 'wb') as out_file:
-                code = response.status_code
+            response = await session.get(apk_url)
+            async with aiofiles.open(apk_save_path, 'wb') as out_file:
+                code = response.status
                 if code != 200:
                     logging.warning(f'HTTP code for {apk.pkg_name} is {code}')
-                out_file.write(response.content)
+                await out_file.write(await response.read())
         except:
             logging.error(f'Unexpected error while downloading {apk.pkg_name}: {sys.exc_info()[1]}')

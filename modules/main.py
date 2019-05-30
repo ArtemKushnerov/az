@@ -27,8 +27,7 @@ from modules.exceptions import AzException, NoArgsException
 @click.option('--seed', '-sd', type=click.INT, help='Seed for a random algorithm.')
 @click.option('--key', '-k', help='Androzoo api key.')
 @click.option('--input-file', '-i', help='Path to input csv.')
-@click.option('--threads', '-t', type=click.INT, default=4, help='Number of threads for concurrent download. 4 by default.')
-@click.version_option(message='%(version)s')
+@click.version_option(version='test', message='%(version)s')
 def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5, key, input_file, threads):
     """Downloads specified number of apks satisfying specified criteria from androzoo repository. Saves specified metadata to metadata.csv.
     dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive. One of the bounds can be omitted (i.e. you can write :upper or lower:)
@@ -49,7 +48,7 @@ def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, 
         logging_util.setup_logging()
         number, *criteria_args, metadata, key, input_file = Parser(args).parse()
         criteria = Criteria(*criteria_args)
-        az.run(input_file, key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed, threads=threads)
+        az.run(input_file, key, number, criteria, out_dir=out if out else os.getcwd(), metadata=metadata, seed=seed)
     except NoArgsException:
         with click.Context(run) as ctx:
             click.echo(run.get_help(ctx))

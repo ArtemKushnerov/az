@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='azoo',
-    version='1.3.1',
+    version='1.3.0',
     author="Artsiom Kushnariou",
     author_email="kushnerovartem@gmail.com",
     description="Downloads apks from androzoo repository https://androzoo.uni.lu/",

@@ -30,7 +30,7 @@ class SourceTest(unittest.TestCase):
         self.assertEqual(actual_apks, expected_apks)
 
     def test_hadles_commas_in_column(self):
-        source = Source(input_file= 'resources/commas_in_column.csv')
+        source = Source(input_file=os.path.join(THIS_DIR, 'resources/commas_in_column.csv'))
         try:
             actual_apk = next(source)
             expected_apk = Apk(**{'sha256': 'BC564D52C6E79E1676C19D9602B1359A33B8714A1DC5FCB8ED602209D0B70266',

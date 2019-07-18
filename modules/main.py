@@ -28,7 +28,7 @@ from modules.exceptions import AzException, NoArgsException
 @click.option('--key', '-k', help='Androzoo api key.')
 @click.option('--input-file', '-i', help='Path to input csv.')
 @click.version_option(version='test', message='%(version)s')
-def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5, key, input_file, threads):
+def run(number, dexdate, apksize, vtdetection, pkgname, markets, metadata, out, seed, sha256, sha1, md5, key, input_file):
     """Downloads specified number of apks satisfying specified criteria from androzoo repository. Saves specified metadata to metadata.csv.
     dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive. One of the bounds can be omitted (i.e. you can write :upper or lower:)
     pkgname, markets, metadata, sha256, sha1, md5 can be either single values or comma separated lists.

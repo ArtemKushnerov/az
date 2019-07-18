@@ -8,7 +8,7 @@ Key and input file can be specified as options or via local or global config fil
 Allows downloading in the multiple threads.
 
 ### PREREQUISITES
-- Python 3.6
+- Python 3.6 or newer
 
 ### INSTALLATION
 

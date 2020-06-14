@@ -1,3 +1,7 @@
+### CONTRIBUTION
+
+I recently had no time to maintain the project, so you guys who use it are welcome to contribute. If you feel something is off and you see how to improve it feel free to create a Pull Request. Also, there is a Trello board with ideas for imporovements you can use it for inspiration https://trello.com/b/45PDuGf6/az .
+
 [![Build Status](https://travis-ci.com/ArtemKushnerov/az.svg?branch=master)](https://travis-ci.com/ArtemKushnerov/az)
 
 Downloads specified number of **randomly chosen** apks satisfying specified criteria from androzoo repository.  

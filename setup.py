@@ -26,7 +26,7 @@ setup(
         'setuptools==41.0.1',
         'python_dateutil==2.7.2',
         'PyYAML==4.2b1',
-        'requests==2.20.0',
+        'requests==2.24.0',
     ],
     classifiers=[
         "Programming Language :: Python :: 3.6",

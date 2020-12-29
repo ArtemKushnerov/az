@@ -23,7 +23,7 @@ setup(
     },
     install_requires=[
         'click==6.7',
-        'setuptools==41.0.1',
+        'setuptools==51.1.1',
         'python_dateutil==2.7.2',
         'PyYAML==4.2b1',
         'requests==2.20.0',

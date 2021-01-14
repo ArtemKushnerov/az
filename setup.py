@@ -25,7 +25,7 @@ setup(
         'click==6.7',
         'setuptools==41.0.1',
         'python_dateutil==2.7.2',
-        'PyYAML==4.2b1',
+        'PyYAML==5.4b1',
         'requests==2.20.0',
     ],
     classifiers=[

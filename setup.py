@@ -22,7 +22,7 @@ setup(
         '': ['*.yaml'],
     },
     install_requires=[
-        'click==6.7',
+        'click==8.0.1',
         'setuptools==41.0.1',
         'python_dateutil==2.7.2',
         'PyYAML==4.2b1',
